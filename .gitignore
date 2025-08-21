@@ -18,3 +18,4 @@ src/*
 .eleventy.js.map.gz.map.gz.map.gz
 .eleventy.js.map.gz.map.gz.map.gz.map
 .eleventy.js.map.gz.map.gz.map.gz.map.gz
+.eleventyignore

@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DaniR | Sitio Oficial</title>
-  <meta name="description" content="Electronic Music Producer &amp; DJ">
+  <meta name="description" content="Productor y DJ de Música Electrónica">
   <meta name="author" content="Hypear">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="">
   <meta property="og:title" content="DaniR | Sitio Oficial">
-  <meta property="og:description" content="Electronic Music Producer &amp; DJ">
+  <meta property="og:description" content="Productor y DJ de Música Electrónica">
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="">
   <meta property="twitter:title" content="DaniR | Sitio Oficial">
-  <meta property="twitter:description" content="Electronic Music Producer &amp; DJ">
+  <meta property="twitter:description" content="Productor y DJ de Música Electrónica">
   
   <link rel="stylesheet" href="/styles.css">
   
@@ -83,6 +83,71 @@
   </div>
   <div class="hero-overlay"></div>
   
+  <!-- Language Selector -->
+  <div class="hero-language-selector">
+           <div class="language-selector" data-default-lang="es">
+         <button class="lang-btn " data-lang="en" aria-label="English">
+           🇬🇧
+         </button>
+         <button class="lang-btn active" data-lang="es" aria-label="Español">
+           🇪🇸
+         </button>
+         <button class="lang-btn " data-lang="fr" aria-label="Français">
+           🇫🇷
+         </button>
+       </div>
+
+<style>
+.language-selector {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.lang-btn {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.lang-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.lang-btn.active {
+  background: #fff;
+  border-color: #fff;
+  position: relative;
+  font-weight: bold;
+}
+
+
+
+@media (max-width: 768px) {
+  .lang-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
+</style>
+
+
+
+  </div>
+  
   <div class="hero-content">
     
       <img src="/assets/images/daniR_avatar.png" alt="DaniR" class="hero-avatar">
@@ -91,7 +156,7 @@
     <h1 class="hero-title">DaniR</h1>
 
     
-      <p class="hero-subtitle">Electronic Music Producer &amp; DJ</p>
+      <p class="hero-subtitle">Productor y DJ de Música Electrónica</p>
     
 
     <div class="hero-cta">
@@ -125,12 +190,12 @@
         
           <li>
             <a href="#hero" class="hero-nav-link "
-               onclick="">Home</a>
+               onclick="">Inicio</a>
           </li>
         
           <li>
             <a href="#releases" class="hero-nav-link active"
-               onclick="">Music</a>
+               onclick="">Música</a>
           </li>
         
           <li>
@@ -140,17 +205,17 @@
         
           <li>
             <a href="#bio" class="hero-nav-link "
-               onclick="">Bio</a>
+               onclick="">Biografía</a>
           </li>
         
           <li>
             <a href="#interviews" class="hero-nav-link "
-               onclick="">Press</a>
+               onclick="">Prensa</a>
           </li>
         
           <li>
             <a href="#contact" class="hero-nav-link "
-               onclick="">Contact</a>
+               onclick="">Contacto</a>
           </li>
         
       </ul>
@@ -200,6 +265,13 @@
   bottom: 0;
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
   z-index: 1;
+}
+
+.hero-language-selector {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 10;
 }
 
 .hero-content {
@@ -356,9 +428,10 @@
   
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Latest Music</h2>
+      <h2 class="section-title">Última Música</h2>
       
-        <p class="section-subtitle">Supported by the best record labels and DJs</p>
+      
+        <p class="section-subtitle">Apoyado por los mejores sellos discográficos y DJs</p>
       
     </div>
     
@@ -605,24 +678,25 @@
             let index = 0;
 
             function applyTransform() {
-              const translate = -(index * (cardWidth() + gapPx));
+              const cardWidthWithGap = cardWidth() + gapPx;
+              const containerWidth = carousel.offsetWidth;
+              
+              // Calculate center position
+              const cardCenter = index * cardWidthWithGap + cardWidth() / 2;
+              const containerCenter = containerWidth / 2;
+              const translate = containerCenter - cardCenter;
+              
               track.style.transform = `translateX(${translate}px)`;
             }
 
             function goTo(i) {
               if (!cards.length) return;
               
-              // Calculate how many cards can be visible
-              const containerWidth = carousel.offsetWidth;
-              const cardWidthWithGap = cardWidth() + gapPx;
-              const visibleCards = Math.floor(containerWidth / cardWidthWithGap);
-              const maxIndex = Math.max(0, cards.length - visibleCards);
-              
               // Prevent going beyond bounds
               if (i < 0) {
                 index = 0;
-              } else if (i > maxIndex) {
-                index = maxIndex;
+              } else if (i >= cards.length) {
+                index = cards.length - 1;
               } else {
                 index = i;
               }
@@ -722,7 +796,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #00ff88);
+  background: linear-gradient(45deg, #fff, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -745,7 +819,7 @@
 }
 
 .tab-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.8);
   color: rgba(255, 255, 255, 0.8);
   border: none;
   padding: 0.75rem 1.5rem;
@@ -753,17 +827,30 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .tab-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.9);
   color: white;
 }
 
 .tab-button.active {
-  background: #00ff88;
-  color: #000;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  font-weight: 700;
+  border: none;
+  outline: none;
+}
+
+.tab-button:focus {
+  outline: none;
+  border: none;
+}
+
+.tab-button:active {
+  border: none;
+  outline: none;
 }
 
 .tab-content {
@@ -1438,7 +1525,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   border: none;
   color: #000;
   font-size: 1.5rem;
@@ -1465,7 +1552,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   color: #000;
   display: flex;
   align-items: center;
@@ -1502,19 +1589,31 @@
   gap: 3rem;
   align-items: center;
   color: white;
+  min-height: 0;
+  overflow: visible;
+}
+
+.bio-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bio-image img {
   width: 100%;
+  max-width: 400px;
   height: auto;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
 }
 
 .bio-text {
   font-size: 1.1rem;
   line-height: 1.8;
   opacity: 0.9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Contact Content */
@@ -1528,14 +1627,14 @@
   align-items: center;
   gap: 1rem;
   font-size: 1.5rem;
-  color: #00ff88;
+  color: #fff;
   text-decoration: none;
   margin-bottom: 3rem;
   transition: color 0.3s ease;
 }
 
 .contact-email:hover {
-  color: #00cc6a;
+  color: #ccc;
 }
 
 .social-links {
@@ -1559,7 +1658,7 @@
 }
 
 .social-link:hover {
-  background: #00ff88;
+  background: #fff;
   color: #000;
   transform: translateY(-5px);
 }
@@ -1602,16 +1701,23 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    padding: 0 1rem;
   }
   
   .bio-image {
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
+  }
+  
+  .bio-image img {
+    max-width: 100%;
+    height: auto;
   }
   
   .bio-text {
     font-size: 1rem;
     line-height: 1.6;
+    padding: 0 0.5rem;
   }
   
   .social-links {
@@ -1645,6 +1751,10 @@
     margin-bottom: 1.5rem;
   }
   
+  .section-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+  
   .release-info,
   .event-info,
   .media-info {
@@ -1653,6 +1763,45 @@
   
   .bio-content {
     gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bio-image {
+    max-width: 250px;
+  }
+  
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .content-section {
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+  
+  .bio-content {
+    gap: 1rem;
+    padding: 0 0.25rem;
+  }
+  
+  .bio-image {
+    max-width: 200px;
+  }
+  
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
   
   .bio-image {
@@ -1725,9 +1874,10 @@
   
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Next Gigs</h2>
+      <h2 class="section-title">Próximos Shows</h2>
       
-        <p class="section-subtitle">Ready?</p>
+      
+        <p class="section-subtitle">¿Listo?</p>
       
     </div>
     
@@ -1744,11 +1894,11 @@
     <img src="/assets/images/event_stock1.jpg" alt="Club Paradise" loading="lazy">
   </div>
   <div class="carousel-info">
-    <div class="carousel-date">September 15, 2025</div>
+    <div class="carousel-date">15 de septiembre de 2025</div>
     <div class="carousel-venue-row">
       <div class="carousel-venue">Club Paradise</div>
     </div>
-    <div class="carousel-location">Miami, FL, USA</div>
+    <div class="carousel-location">Miami, FL, Estados Unidos</div>
     
       <a href="#" class="carousel-ticket-icon" target="_blank" rel="noopener" aria-label="Tickets" 
          onclick="">
@@ -1765,11 +1915,11 @@
     <img src="/assets/images/event_stock2.jpg" alt="Warehouse Party" loading="lazy">
   </div>
   <div class="carousel-info">
-    <div class="carousel-date">October 1, 2025</div>
+    <div class="carousel-date">1 de octubre de 2025</div>
     <div class="carousel-venue-row">
       <div class="carousel-venue">Warehouse Party</div>
     </div>
-    <div class="carousel-location">Berlin, Germany</div>
+    <div class="carousel-location">Berlín, Alemania</div>
     
       <a href="#" class="carousel-ticket-icon" target="_blank" rel="noopener" aria-label="Tickets" 
          onclick="">
@@ -1786,7 +1936,7 @@
     <img src="/assets/images/event_stock3.jpg" alt="Zebra Club" loading="lazy">
   </div>
   <div class="carousel-info">
-    <div class="carousel-date">October 8, 2025</div>
+    <div class="carousel-date">8 de octubre de 2025</div>
     <div class="carousel-venue-row">
       <div class="carousel-venue">Zebra Club</div>
     </div>
@@ -1807,7 +1957,7 @@
     <img src="/assets/images/event_stock4.jpg" alt="Zandanga" loading="lazy">
   </div>
   <div class="carousel-info">
-    <div class="carousel-date">October 15, 2025</div>
+    <div class="carousel-date">15 de octubre de 2025</div>
     <div class="carousel-venue-row">
       <div class="carousel-venue">Zandanga</div>
     </div>
@@ -1914,7 +2064,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #00ff88);
+  background: linear-gradient(45deg, #fff, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1937,7 +2087,7 @@
 }
 
 .tab-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.8);
   color: rgba(255, 255, 255, 0.8);
   border: none;
   padding: 0.75rem 1.5rem;
@@ -1945,17 +2095,30 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .tab-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.9);
   color: white;
 }
 
 .tab-button.active {
-  background: #00ff88;
-  color: #000;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  font-weight: 700;
+  border: none;
+  outline: none;
+}
+
+.tab-button:focus {
+  outline: none;
+  border: none;
+}
+
+.tab-button:active {
+  border: none;
+  outline: none;
 }
 
 .tab-content {
@@ -2630,7 +2793,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   border: none;
   color: #000;
   font-size: 1.5rem;
@@ -2657,7 +2820,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   color: #000;
   display: flex;
   align-items: center;
@@ -2694,19 +2857,31 @@
   gap: 3rem;
   align-items: center;
   color: white;
+  min-height: 0;
+  overflow: visible;
+}
+
+.bio-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bio-image img {
   width: 100%;
+  max-width: 400px;
   height: auto;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
 }
 
 .bio-text {
   font-size: 1.1rem;
   line-height: 1.8;
   opacity: 0.9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Contact Content */
@@ -2720,14 +2895,14 @@
   align-items: center;
   gap: 1rem;
   font-size: 1.5rem;
-  color: #00ff88;
+  color: #fff;
   text-decoration: none;
   margin-bottom: 3rem;
   transition: color 0.3s ease;
 }
 
 .contact-email:hover {
-  color: #00cc6a;
+  color: #ccc;
 }
 
 .social-links {
@@ -2751,7 +2926,7 @@
 }
 
 .social-link:hover {
-  background: #00ff88;
+  background: #fff;
   color: #000;
   transform: translateY(-5px);
 }
@@ -2794,16 +2969,23 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    padding: 0 1rem;
   }
   
   .bio-image {
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
+  }
+  
+  .bio-image img {
+    max-width: 100%;
+    height: auto;
   }
   
   .bio-text {
     font-size: 1rem;
     line-height: 1.6;
+    padding: 0 0.5rem;
   }
   
   .social-links {
@@ -2837,6 +3019,10 @@
     margin-bottom: 1.5rem;
   }
   
+  .section-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+  
   .release-info,
   .event-info,
   .media-info {
@@ -2845,6 +3031,45 @@
   
   .bio-content {
     gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bio-image {
+    max-width: 250px;
+  }
+  
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .content-section {
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+  
+  .bio-content {
+    gap: 1rem;
+    padding: 0 0.25rem;
+  }
+  
+  .bio-image {
+    max-width: 200px;
+  }
+  
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
   
   .bio-image {
@@ -2919,7 +3144,8 @@
   
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Bio</h2>
+      <h2 class="section-title">Biografía</h2>
+      
       
     </div>
     
@@ -2933,7 +3159,7 @@
             </div>
           
           <div class="bio-text">
-            <p>Dani R born in Cordoba, Argentina. He is a producer Minimal / Minimal Deep - Tech in full growth. he began to be interested in music in his adolescence using the piano as a connector. In August 2019 he began his career as a DJ and in July 2020 as a producer. So much in his mixes as in his tracks, the cheerful synths predominate, classic house, generating a pleasant atmosphere, always preserving his minimalist bass to never lose the groove. In his short career as a producer he has been able to seal his music on labels such as NoPreset, Urban Garden, Fahren Lab, Mtion.</p>
+            <p>Dani R nacido en Córdoba, Argentina. Es un productor Minimal / Minimal Deep - Tech en pleno crecimiento. Comenzó a interesarse por la música en su adolescencia usando el piano como conector. En agosto de 2019 comenzó su carrera como DJ y en julio de 2020 como productor. Tanto en sus mezclas como en sus tracks, predominan los sintetizadores alegres, house clásico, generando una atmósfera agradable, siempre preservando su bajo minimalista para nunca perder el groove. En su corta carrera como productor ha podido sellar su música en sellos como NoPreset, Urban Garden, Fahren Lab, Mtion.</p>
           </div>
         </div>
       
@@ -2976,7 +3202,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #00ff88);
+  background: linear-gradient(45deg, #fff, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -2999,7 +3225,7 @@
 }
 
 .tab-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.8);
   color: rgba(255, 255, 255, 0.8);
   border: none;
   padding: 0.75rem 1.5rem;
@@ -3007,17 +3233,30 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .tab-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.9);
   color: white;
 }
 
 .tab-button.active {
-  background: #00ff88;
-  color: #000;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  font-weight: 700;
+  border: none;
+  outline: none;
+}
+
+.tab-button:focus {
+  outline: none;
+  border: none;
+}
+
+.tab-button:active {
+  border: none;
+  outline: none;
 }
 
 .tab-content {
@@ -3692,7 +3931,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   border: none;
   color: #000;
   font-size: 1.5rem;
@@ -3719,7 +3958,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   color: #000;
   display: flex;
   align-items: center;
@@ -3756,19 +3995,31 @@
   gap: 3rem;
   align-items: center;
   color: white;
+  min-height: 0;
+  overflow: visible;
+}
+
+.bio-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bio-image img {
   width: 100%;
+  max-width: 400px;
   height: auto;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
 }
 
 .bio-text {
   font-size: 1.1rem;
   line-height: 1.8;
   opacity: 0.9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Contact Content */
@@ -3782,14 +4033,14 @@
   align-items: center;
   gap: 1rem;
   font-size: 1.5rem;
-  color: #00ff88;
+  color: #fff;
   text-decoration: none;
   margin-bottom: 3rem;
   transition: color 0.3s ease;
 }
 
 .contact-email:hover {
-  color: #00cc6a;
+  color: #ccc;
 }
 
 .social-links {
@@ -3813,7 +4064,7 @@
 }
 
 .social-link:hover {
-  background: #00ff88;
+  background: #fff;
   color: #000;
   transform: translateY(-5px);
 }
@@ -3856,16 +4107,23 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    padding: 0 1rem;
   }
   
   .bio-image {
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
+  }
+  
+  .bio-image img {
+    max-width: 100%;
+    height: auto;
   }
   
   .bio-text {
     font-size: 1rem;
     line-height: 1.6;
+    padding: 0 0.5rem;
   }
   
   .social-links {
@@ -3899,6 +4157,10 @@
     margin-bottom: 1.5rem;
   }
   
+  .section-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+  
   .release-info,
   .event-info,
   .media-info {
@@ -3907,6 +4169,45 @@
   
   .bio-content {
     gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bio-image {
+    max-width: 250px;
+  }
+  
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .content-section {
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+  
+  .bio-content {
+    gap: 1rem;
+    padding: 0 0.25rem;
+  }
+  
+  .bio-image {
+    max-width: 200px;
+  }
+  
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
   
   .bio-image {
@@ -3979,7 +4280,8 @@
   
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Press</h2>
+      <h2 class="section-title">Prensa</h2>
+      
       
     </div>
     
@@ -4090,7 +4392,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #00ff88);
+  background: linear-gradient(45deg, #fff, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -4113,7 +4415,7 @@
 }
 
 .tab-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.8);
   color: rgba(255, 255, 255, 0.8);
   border: none;
   padding: 0.75rem 1.5rem;
@@ -4121,17 +4423,30 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .tab-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.9);
   color: white;
 }
 
 .tab-button.active {
-  background: #00ff88;
-  color: #000;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  font-weight: 700;
+  border: none;
+  outline: none;
+}
+
+.tab-button:focus {
+  outline: none;
+  border: none;
+}
+
+.tab-button:active {
+  border: none;
+  outline: none;
 }
 
 .tab-content {
@@ -4806,7 +5121,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   border: none;
   color: #000;
   font-size: 1.5rem;
@@ -4833,7 +5148,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   color: #000;
   display: flex;
   align-items: center;
@@ -4870,19 +5185,31 @@
   gap: 3rem;
   align-items: center;
   color: white;
+  min-height: 0;
+  overflow: visible;
+}
+
+.bio-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bio-image img {
   width: 100%;
+  max-width: 400px;
   height: auto;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
 }
 
 .bio-text {
   font-size: 1.1rem;
   line-height: 1.8;
   opacity: 0.9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Contact Content */
@@ -4896,14 +5223,14 @@
   align-items: center;
   gap: 1rem;
   font-size: 1.5rem;
-  color: #00ff88;
+  color: #fff;
   text-decoration: none;
   margin-bottom: 3rem;
   transition: color 0.3s ease;
 }
 
 .contact-email:hover {
-  color: #00cc6a;
+  color: #ccc;
 }
 
 .social-links {
@@ -4927,7 +5254,7 @@
 }
 
 .social-link:hover {
-  background: #00ff88;
+  background: #fff;
   color: #000;
   transform: translateY(-5px);
 }
@@ -4970,16 +5297,23 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    padding: 0 1rem;
   }
   
   .bio-image {
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
+  }
+  
+  .bio-image img {
+    max-width: 100%;
+    height: auto;
   }
   
   .bio-text {
     font-size: 1rem;
     line-height: 1.6;
+    padding: 0 0.5rem;
   }
   
   .social-links {
@@ -5013,6 +5347,10 @@
     margin-bottom: 1.5rem;
   }
   
+  .section-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+  
   .release-info,
   .event-info,
   .media-info {
@@ -5021,6 +5359,45 @@
   
   .bio-content {
     gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bio-image {
+    max-width: 250px;
+  }
+  
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .content-section {
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+  
+  .bio-content {
+    gap: 1rem;
+    padding: 0 0.25rem;
+  }
+  
+  .bio-image {
+    max-width: 200px;
+  }
+  
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
   
   .bio-image {
@@ -5093,9 +5470,10 @@
   
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Get In Touch</h2>
+      <h2 class="section-title">Contacto</h2>
       
-        <p class="section-subtitle">Bookings &amp; collaborations</p>
+      
+        <p class="section-subtitle">Reservas y colaboraciones</p>
       
     </div>
     
@@ -5178,7 +5556,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #00ff88);
+  background: linear-gradient(45deg, #fff, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -5201,7 +5579,7 @@
 }
 
 .tab-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.8);
   color: rgba(255, 255, 255, 0.8);
   border: none;
   padding: 0.75rem 1.5rem;
@@ -5209,17 +5587,30 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .tab-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.9);
   color: white;
 }
 
 .tab-button.active {
-  background: #00ff88;
-  color: #000;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  font-weight: 700;
+  border: none;
+  outline: none;
+}
+
+.tab-button:focus {
+  outline: none;
+  border: none;
+}
+
+.tab-button:active {
+  border: none;
+  outline: none;
 }
 
 .tab-content {
@@ -5894,7 +6285,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   border: none;
   color: #000;
   font-size: 1.5rem;
@@ -5921,7 +6312,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #fff;
   color: #000;
   display: flex;
   align-items: center;
@@ -5958,19 +6349,31 @@
   gap: 3rem;
   align-items: center;
   color: white;
+  min-height: 0;
+  overflow: visible;
+}
+
+.bio-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bio-image img {
   width: 100%;
+  max-width: 400px;
   height: auto;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
 }
 
 .bio-text {
   font-size: 1.1rem;
   line-height: 1.8;
   opacity: 0.9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Contact Content */
@@ -5984,14 +6387,14 @@
   align-items: center;
   gap: 1rem;
   font-size: 1.5rem;
-  color: #00ff88;
+  color: #fff;
   text-decoration: none;
   margin-bottom: 3rem;
   transition: color 0.3s ease;
 }
 
 .contact-email:hover {
-  color: #00cc6a;
+  color: #ccc;
 }
 
 .social-links {
@@ -6015,7 +6418,7 @@
 }
 
 .social-link:hover {
-  background: #00ff88;
+  background: #fff;
   color: #000;
   transform: translateY(-5px);
 }
@@ -6058,16 +6461,23 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    padding: 0 1rem;
   }
   
   .bio-image {
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
+  }
+  
+  .bio-image img {
+    max-width: 100%;
+    height: auto;
   }
   
   .bio-text {
     font-size: 1rem;
     line-height: 1.6;
+    padding: 0 0.5rem;
   }
   
   .social-links {
@@ -6101,6 +6511,10 @@
     margin-bottom: 1.5rem;
   }
   
+  .section-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+  
   .release-info,
   .event-info,
   .media-info {
@@ -6109,6 +6523,45 @@
   
   .bio-content {
     gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bio-image {
+    max-width: 250px;
+  }
+  
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .content-section {
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+  
+  .bio-content {
+    gap: 1rem;
+    padding: 0 0.25rem;
+  }
+  
+  .bio-image {
+    max-width: 200px;
+  }
+  
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
   
   .bio-image {
@@ -6184,17 +6637,17 @@
       
       <div class="footer-links">
         
-          <a href="#hero" class="footer-link">Home</a>
+          <a href="#hero" class="footer-link">Inicio</a>
         
-          <a href="#releases" class="footer-link">Music</a>
+          <a href="#releases" class="footer-link">Música</a>
         
           <a href="#gigs" class="footer-link">Shows</a>
         
-          <a href="#bio" class="footer-link">Bio</a>
+          <a href="#bio" class="footer-link">Biografía</a>
         
-          <a href="#interviews" class="footer-link">Press</a>
+          <a href="#interviews" class="footer-link">Prensa</a>
         
-          <a href="#contact" class="footer-link">Contact</a>
+          <a href="#contact" class="footer-link">Contacto</a>
         
       </div>
       
@@ -6221,9 +6674,74 @@
       </div>
     </div>
     
+    <!-- Language Selector -->
+    <div class="footer-language-selector">
+             <div class="language-selector" data-default-lang="es">
+         <button class="lang-btn " data-lang="en" aria-label="English">
+           🇬🇧
+         </button>
+         <button class="lang-btn active" data-lang="es" aria-label="Español">
+           🇪🇸
+         </button>
+         <button class="lang-btn " data-lang="fr" aria-label="Français">
+           🇫🇷
+         </button>
+       </div>
+
+<style>
+.language-selector {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.lang-btn {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.lang-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.lang-btn.active {
+  background: #fff;
+  border-color: #fff;
+  position: relative;
+  font-weight: bold;
+}
+
+
+
+@media (max-width: 768px) {
+  .lang-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
+</style>
+
+
+
+    </div>
+    
     <div class="footer-bottom">
-      <p>&copy; 2025 DaniR | Sitio Oficial. All rights reserved.</p>
-      <p>Powered by <a href="https://www.instagram.com/hypearagency/" target="_blank" rel="noopener">Hypear Agency</a></p>
+      <p>&copy; 2025 DaniR | Sitio Oficial. Todos los derechos reservados.</p>
+      <p>Desarrollado por <a href="https://www.instagram.com/hypearagency/" target="_blank" rel="noopener">Hypear Agency</a></p>
     </div>
   </div>
 </footer>
@@ -6279,7 +6797,7 @@
 }
 
 .footer-link:hover {
-  color: #00ff88;
+  color: #fff;
 }
 
 .footer-social {
@@ -6302,9 +6820,15 @@
 }
 
 .footer-social-link:hover {
-  background: #00ff88;
+  background: #fff;
   color: #000;
   transform: translateY(-3px);
+}
+
+.footer-language-selector {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
 }
 
 .footer-bottom {
@@ -6334,10 +6858,686 @@
 </style>
   </main>
   
+  <!-- Site data for JavaScript -->
+  <script>
+    window.siteData = {
+  "meta": {
+    "title": {
+      "en": "DaniR | Official Website",
+      "es": "DaniR | Sitio Oficial",
+      "fr": "DaniR | Site Officiel"
+    },
+    "description": {
+      "en": "Electronic Music Producer & DJ",
+      "es": "Productor y DJ de Música Electrónica",
+      "fr": "Producteur et DJ de Musique Électronique"
+    },
+    "url": "",
+    "author": "Hypear"
+  },
+  "settings": {
+    "useSectionBackgrounds": false,
+    "navPosition": "hero",
+    "defaultLanguage": "es"
+  },
+  "analytics": {
+    "enabled": false,
+    "googleAnalyticsId": "GA_MEASUREMENT_ID_PLACEHOLDER",
+    "trackEvents": {
+      "ticketClicks": true,
+      "releaseClicks": true,
+      "navigation": true
+    }
+  },
+  "hero": {
+    "video": "/assets/DaniR_BG.mp4",
+    "profileImage": "/assets/images/daniR_avatar.png",
+    "name": "DaniR",
+    "subtitle": {
+      "en": "Electronic Music Producer & DJ",
+      "es": "Productor y DJ de Música Electrónica",
+      "fr": "Producteur et DJ de Musique Électronique"
+    },
+    "scrollText": {
+      "en": "Latest Music",
+      "es": "Última Música",
+      "fr": "Dernière Musique"
+    }
+  },
+  "navigation": [
+    {
+      "text": {
+        "en": "Home",
+        "es": "Inicio",
+        "fr": "Accueil"
+      },
+      "href": "#hero"
+    },
+    {
+      "text": {
+        "en": "Music",
+        "es": "Música",
+        "fr": "Musique"
+      },
+      "href": "#releases",
+      "active": true
+    },
+    {
+      "text": {
+        "en": "Shows",
+        "es": "Shows",
+        "fr": "Concerts"
+      },
+      "href": "#gigs"
+    },
+    {
+      "text": {
+        "en": "Bio",
+        "es": "Biografía",
+        "fr": "Biographie"
+      },
+      "href": "#bio"
+    },
+    {
+      "text": {
+        "en": "Press",
+        "es": "Prensa",
+        "fr": "Presse"
+      },
+      "href": "#interviews"
+    },
+    {
+      "text": {
+        "en": "Contact",
+        "es": "Contacto",
+        "fr": "Contact"
+      },
+      "href": "#contact"
+    }
+  ],
+  "sections": {
+    "releases": {
+      "id": "releases",
+      "title": {
+        "en": "Latest Music",
+        "es": "Última Música",
+        "fr": "Dernière Musique"
+      },
+      "subtitle": {
+        "en": "Supported by the best record labels and DJs",
+        "es": "Apoyado por los mejores sellos discográficos y DJs",
+        "fr": "Soutenu par les meilleurs labels et DJs"
+      },
+      "type": "releases",
+      "items": [
+        {
+          "title": "Solar Path EP",
+          "label": "Kief Music",
+          "image": "/assets/images/solar_path_ep.webp",
+          "links": [
+            {
+              "platform": "Spotify",
+              "iconClass": "fab",
+              "icon": "spotify",
+              "url": "https://open.spotify.com/album/1YRaIzWlrVgYnfFT22MPoH"
+            },
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/solar-path-ep/4989377"
+            },
+            {
+              "platform": "SoundCloud",
+              "iconClass": "fab",
+              "icon": "soundcloud",
+              "url": "https://soundcloud.com/danir_music/sets/solar-path-ep"
+            }
+          ]
+        },
+        {
+          "title": "Midnight Motion EP",
+          "label": "Kief Music",
+          "image": "/assets/images/midnight_motion.webp",
+          "links": [
+            {
+              "platform": "Spotify",
+              "iconClass": "fab",
+              "icon": "spotify",
+              "url": "https://open.spotify.com/album/0MRC1n6XkMUved3pKzUyft"
+            },
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/midnight-motion-ep/4975524"
+            },
+            {
+              "platform": "SoundCloud",
+              "iconClass": "fab",
+              "icon": "soundcloud",
+              "url": "https://soundcloud.com/danir_music/sets/midnight-motion-ep"
+            }
+          ]
+        },
+        {
+          "title": "Dancing Together",
+          "label": "Miniline",
+          "image": "/assets/images/dancing_together.webp",
+          "links": [
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/dancing-together/5184663"
+            }
+          ]
+        },
+        {
+          "title": "ONE WAY",
+          "label": "R Records",
+          "image": "/assets/images/one_way.webp",
+          "links": [
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/one-way/3994814"
+            }
+          ]
+        },
+        {
+          "title": "Villa Miami",
+          "label": "R Records",
+          "image": "/assets/images/villa_miami.webp",
+          "links": [
+            {
+              "platform": "Spotify",
+              "iconClass": "fab",
+              "icon": "spotify",
+              "url": "https://open.spotify.com/album/64UkemhITtdhsAViUHiG4p"
+            },
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/villa-miami/3399142"
+            }
+          ]
+        },
+        {
+          "title": "13 Years los de la [N]",
+          "label": "NOPRESET Records",
+          "image": "/assets/images/13_years.webp",
+          "links": [
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/13-years-los-de-la-n/3330923"
+            }
+          ]
+        },
+        {
+          "title": "House Music",
+          "label": "We Music Records",
+          "image": "/assets/images/house_music.webp",
+          "links": [
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/house-music/1684276"
+            }
+          ]
+        },
+        {
+          "title": "Shrek",
+          "label": "Urban Garden Recordings",
+          "image": "/assets/images/shrek.webp",
+          "links": [
+            {
+              "platform": "Spotify",
+              "iconClass": "fab",
+              "icon": "spotify",
+              "url": "https://open.spotify.com/album/4EVS26mF1WV4AvE5xDh9gI"
+            },
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/shrek/3182148"
+            }
+          ]
+        },
+        {
+          "title": "Lezzzgo",
+          "label": "Mtion Records",
+          "image": "/assets/images/lezzgo.webp",
+          "links": [
+            {
+              "platform": "Beatport",
+              "iconClass": "fas",
+              "icon": "headphones",
+              "url": "https://www.beatport.com/release/lezzzgo/4608993"
+            }
+          ]
+        }
+      ]
+    },
+    "gigs": {
+      "id": "gigs",
+      "title": {
+        "en": "Next Gigs",
+        "es": "Próximos Shows",
+        "fr": "Prochains Concerts"
+      },
+      "subtitle": {
+        "en": "Ready?",
+        "es": "¿Listo?",
+        "fr": "Prêt ?"
+      },
+      "type": "events",
+      "items": [
+        {
+          "date": "2025-09-15",
+          "venue": {
+            "en": "Club Paradise",
+            "es": "Club Paradise",
+            "fr": "Club Paradise"
+          },
+          "location": {
+            "en": "Miami, FL, USA",
+            "es": "Miami, FL, Estados Unidos",
+            "fr": "Miami, FL, États-Unis"
+          },
+          "image": "/assets/images/event_stock1.jpg",
+          "ticketUrl": "#"
+        },
+        {
+          "date": "2025-10-01",
+          "venue": {
+            "en": "Warehouse Party",
+            "es": "Warehouse Party",
+            "fr": "Warehouse Party"
+          },
+          "location": {
+            "en": "Berlin, Germany",
+            "es": "Berlín, Alemania",
+            "fr": "Berlin, Allemagne"
+          },
+          "image": "/assets/images/event_stock2.jpg",
+          "ticketUrl": "#"
+        },
+        {
+          "date": "2025-10-08",
+          "venue": {
+            "en": "Zebra Club",
+            "es": "Zebra Club",
+            "fr": "Zebra Club"
+          },
+          "location": {
+            "en": "Villa Carlos Paz, Argentina",
+            "es": "Villa Carlos Paz, Argentina",
+            "fr": "Villa Carlos Paz, Argentine"
+          },
+          "image": "/assets/images/event_stock3.jpg",
+          "ticketUrl": "#"
+        },
+        {
+          "date": "2025-10-15",
+          "venue": {
+            "en": "Zandanga",
+            "es": "Zandanga",
+            "fr": "Zandanga"
+          },
+          "location": {
+            "en": "Lagos, Nigeria",
+            "es": "Lagos, Nigeria",
+            "fr": "Lagos, Nigeria"
+          },
+          "image": "/assets/images/event_stock4.jpg",
+          "ticketUrl": "#"
+        }
+      ]
+    },
+    "bio": {
+      "id": "bio",
+      "title": {
+        "en": "Bio",
+        "es": "Biografía",
+        "fr": "Biographie"
+      },
+      "subtitle": {
+        "en": "",
+        "es": "",
+        "fr": ""
+      },
+      "background": "/assets/images/dark-blue-bg.jpg",
+      "type": "text",
+      "content": {
+        "en": "Dani R born in Cordoba, Argentina. He is a producer Minimal / Minimal Deep - Tech in full growth. he began to be interested in music in his adolescence using the piano as a connector. In August 2019 he began his career as a DJ and in July 2020 as a producer. So much in his mixes as in his tracks, the cheerful synths predominate, classic house, generating a pleasant atmosphere, always preserving his minimalist bass to never lose the groove. In his short career as a producer he has been able to seal his music on labels such as NoPreset, Urban Garden, Fahren Lab, Mtion.",
+        "es": "Dani R nacido en Córdoba, Argentina. Es un productor Minimal / Minimal Deep - Tech en pleno crecimiento. Comenzó a interesarse por la música en su adolescencia usando el piano como conector. En agosto de 2019 comenzó su carrera como DJ y en julio de 2020 como productor. Tanto en sus mezclas como en sus tracks, predominan los sintetizadores alegres, house clásico, generando una atmósfera agradable, siempre preservando su bajo minimalista para nunca perder el groove. En su corta carrera como productor ha podido sellar su música en sellos como NoPreset, Urban Garden, Fahren Lab, Mtion.",
+        "fr": "Dani R né à Cordoba, Argentine. Il est un producteur Minimal / Minimal Deep - Tech en pleine croissance. Il a commencé à s'intéresser à la musique dans son adolescence en utilisant le piano comme connecteur. En août 2019, il a commencé sa carrière de DJ et en juillet 2020 comme producteur. Tant dans ses mix que dans ses tracks, les synthétiseurs joyeux prédominent, house classique, générant une atmosphère agréable, préservant toujours sa basse minimaliste pour ne jamais perdre le groove. Dans sa courte carrière de producteur, il a pu sceller sa musique sur des labels comme NoPreset, Urban Garden, Fahren Lab, Mtion."
+      },
+      "image": "/assets/images/daniR_photo2.jpg"
+    },
+    "interviews": {
+      "id": "interviews",
+      "title": {
+        "en": "Press",
+        "es": "Prensa",
+        "fr": "Presse"
+      },
+      "type": "interviews",
+      "enabled": true,
+      "tabs": [
+        {
+          "id": "radio-interview",
+          "title": "Doctaclub",
+          "type": "video",
+          "videoUrl": "https://www.youtube.com/embed/PwFfrwz_hCQ"
+        },
+        {
+          "id": "radio-interview2",
+          "title": "DaniR x PenBookings",
+          "type": "video",
+          "videoUrl": "https://www.youtube.com/embed/FxCMdwyH5Nc"
+        }
+      ]
+    },
+    "contact": {
+      "id": "contact",
+      "title": {
+        "en": "Get In Touch",
+        "es": "Contacto",
+        "fr": "Contact"
+      },
+      "subtitle": {
+        "en": "Bookings & collaborations",
+        "es": "Reservas y colaboraciones",
+        "fr": "Réservations et collaborations"
+      },
+      "type": "contact",
+      "email": "infopenbookings@gmail.com",
+      "social": [
+        {
+          "platform": "Instagram",
+          "iconClass": "fab",
+          "url": "https://www.instagram.com/dani.r.music?igsh=MTdsdzZ4ZnZkMW90Nw==",
+          "icon": "instagram"
+        },
+        {
+          "platform": "Spotify",
+          "iconClass": "fab",
+          "url": "https://open.spotify.com/artist/6aa0NANtRogyZpT4Ucp7CV?si=e0F6G2uvR_ef5GfY6Oty0g",
+          "icon": "spotify"
+        },
+        {
+          "platform": "SoundCloud",
+          "iconClass": "fab",
+          "url": "https://on.soundcloud.com/Jm9kfut1NkWsclEIei",
+          "icon": "soundcloud"
+        },
+        {
+          "platform": "Beatport",
+          "iconClass": "fas",
+          "url": "https://www.beatport.com/es/artist/dani-r/530142?fbclid=PAQ0xDSwMUAPBleHRuA2FlbQIxMQABp1JmTSzSP2nCvm0BllrHdz5Bieg4MFIwtEKf0OznPW-o5inqifeCJ33czJW0_aem_HAKR5ys_dkCC-KCq0laY0g",
+          "icon": "headphones"
+        }
+      ]
+    }
+  },
+  "copyright": {
+    "rights": {
+      "en": "All rights reserved.",
+      "es": "Todos los derechos reservados.",
+      "fr": "Tous droits réservés."
+    },
+    "poweredBy": {
+      "en": "Powered by",
+      "es": "Desarrollado por",
+      "fr": "Propulsé par"
+    }
+  }
+};
+  </script>
+  
+  <!-- Global Language Selector JavaScript -->
+  <script>
+    (function() {
+      let currentLang;
+      let isInitialized = false;
+      
+      // Get the default language from the data attribute or fallback
+      function getDefaultLanguage() {
+        console.log('Getting default language...');
+        
+        // Get the default from settings first
+        let defaultLang = 'en';
+        
+        // Try to get from data attribute first
+        const selector = document.querySelector('.language-selector');
+        if (selector && selector.dataset.defaultLang) {
+          defaultLang = selector.dataset.defaultLang;
+          console.log('Default language from data attribute:', defaultLang);
+        } else if (window.siteData?.settings?.defaultLanguage) {
+          defaultLang = window.siteData.settings.defaultLanguage;
+          console.log('Default language from siteData:', defaultLang);
+        }
+        
+        console.log('Site default language is:', defaultLang);
+        
+        // Check if we have a saved language preference
+        const savedLang = localStorage.getItem('selectedLanguage');
+        console.log('Saved language from localStorage:', savedLang);
+        
+        // If no saved preference, use the default
+        if (!savedLang) {
+          console.log('No saved language, using default:', defaultLang);
+          return defaultLang;
+        }
+        
+        console.log('Using saved language:', savedLang);
+        return savedLang;
+      }
+      
+      function updateLanguage(lang) {
+        console.log('Updating language to:', lang);
+        currentLang = lang;
+        localStorage.setItem('selectedLanguage', lang);
+        
+        // Update all language buttons
+        const langButtons = document.querySelectorAll('.lang-btn');
+        console.log('Found language buttons:', langButtons.length);
+        langButtons.forEach(btn => {
+          const isActive = btn.dataset.lang === lang;
+          btn.classList.toggle('active', isActive);
+          console.log(`Button ${btn.dataset.lang}: ${isActive ? 'ACTIVE' : 'inactive'}`);
+        });
+        
+        // Update all translatable elements
+        updatePageContent(lang);
+      }
+      
+      function updatePageContent(lang) {
+        const siteData = window.siteData;
+        if (!siteData) return;
+        
+        // Helper function to get translated text
+        function getTranslatedText(obj, lang) {
+          if (!obj) return '';
+          if (typeof obj === 'object' && obj[lang]) {
+            return obj[lang];
+          }
+          return obj;
+        }
+        
+        // Update hero content
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        if (heroSubtitle && siteData.hero?.subtitle) {
+          heroSubtitle.textContent = getTranslatedText(siteData.hero.subtitle, lang);
+        }
+        
+        // Update navigation (hero and main nav)
+        const navLinks = document.querySelectorAll('.nav-link, .hero-nav-link');
+        navLinks.forEach((link, index) => {
+          if (siteData.navigation && siteData.navigation[index]?.text) {
+            link.textContent = getTranslatedText(siteData.navigation[index].text, lang);
+          }
+        });
+        
+        // Update footer links separately
+        const footerLinks = document.querySelectorAll('.footer-link');
+        footerLinks.forEach((link, index) => {
+          if (siteData.navigation && siteData.navigation[index]?.text) {
+            link.textContent = getTranslatedText(siteData.navigation[index].text, lang);
+          }
+        });
+        
+        // Update section titles and subtitles
+        const sectionTitles = document.querySelectorAll('.section-title');
+        const sectionSubtitles = document.querySelectorAll('.section-subtitle');
+        
+        sectionTitles.forEach(element => {
+          const sectionId = element.closest('.content-section')?.id;
+          if (sectionId && siteData.sections?.[sectionId]?.title) {
+            element.textContent = getTranslatedText(siteData.sections[sectionId].title, lang);
+          }
+        });
+        
+        sectionSubtitles.forEach(element => {
+          const sectionId = element.closest('.content-section')?.id;
+          if (sectionId && siteData.sections?.[sectionId]?.subtitle) {
+            element.textContent = getTranslatedText(siteData.sections[sectionId].subtitle, lang);
+          }
+        });
+        
+        // Update bio content
+        const bioContent = document.querySelector('.bio-text p');
+        if (bioContent && siteData.sections?.bio?.content) {
+          bioContent.textContent = getTranslatedText(siteData.sections.bio.content, lang);
+        }
+        
+        // Update meta information
+        if (siteData.meta?.title) {
+          document.title = getTranslatedText(siteData.meta.title, lang);
+        }
+        
+        // Update copyright text
+        const copyrightRights = document.querySelector('.footer-bottom p:first-child');
+        if (copyrightRights && siteData.copyright?.rights) {
+          const year = new Date().getFullYear();
+          const title = getTranslatedText(siteData.meta?.title, lang) || siteData.meta?.title;
+          const rights = getTranslatedText(siteData.copyright.rights, lang);
+          copyrightRights.innerHTML = `&copy; ${year} ${title}. ${rights}`;
+        }
+        
+        const copyrightPoweredBy = document.querySelector('.footer-bottom p:last-child');
+        if (copyrightPoweredBy && siteData.copyright?.poweredBy) {
+          const poweredBy = getTranslatedText(siteData.copyright.poweredBy, lang);
+          copyrightPoweredBy.innerHTML = `${poweredBy} <a href="https://www.instagram.com/hypearagency/" target="_blank" rel="noopener">Hypear Agency</a>`;
+        }
+        
+        // Update event venues and locations
+        const eventVenues = document.querySelectorAll('.carousel-venue');
+        const eventLocations = document.querySelectorAll('.carousel-location');
+        const eventDates = document.querySelectorAll('.carousel-date');
+        
+        // Get the events data
+        const eventsData = siteData.sections?.gigs?.items;
+        if (eventsData) {
+          eventVenues.forEach((venue, index) => {
+            if (eventsData[index]?.venue) {
+              venue.textContent = getTranslatedText(eventsData[index].venue, lang);
+            }
+          });
+          
+          eventLocations.forEach((location, index) => {
+            if (eventsData[index]?.location) {
+              location.textContent = getTranslatedText(eventsData[index].location, lang);
+            }
+          });
+          
+          // Update dates with localized formatting
+          eventDates.forEach((dateElement, index) => {
+            if (eventsData[index]?.date) {
+              const locales = {
+                'en': 'en-US',
+                'es': 'es-ES', 
+                'fr': 'fr-FR'
+              };
+              const locale = locales[lang] || 'en-US';
+              const date = new Date(eventsData[index].date);
+              dateElement.textContent = date.toLocaleDateString(locale, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+            }
+          });
+        }
+      }
+      
+      // Initialize language selector
+      function initializeLanguageSelector() {
+        console.log('Initializing language selector...');
+        console.log('Already initialized?', isInitialized);
+        
+        if (isInitialized) return;
+        
+        const langButtons = document.querySelectorAll('.lang-btn');
+        console.log('Found lang buttons:', langButtons.length);
+        if (langButtons.length === 0) {
+          console.log('No language buttons found, retrying in 100ms...');
+          setTimeout(initializeLanguageSelector, 100);
+          return;
+        }
+        
+        // Add click event listeners
+        langButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            console.log('Language button clicked:', btn.dataset.lang);
+            updateLanguage(btn.dataset.lang);
+          });
+        });
+        
+        // Set initial language
+        currentLang = getDefaultLanguage();
+        console.log('Initial language set to:', currentLang);
+        updateLanguage(currentLang);
+        
+        isInitialized = true;
+        console.log('Language selector initialized!');
+      }
+      
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeLanguageSelector);
+      } else {
+        initializeLanguageSelector();
+      }
+      
+      // Make functions globally available
+      window.updateLanguage = updateLanguage;
+      window.resetToDefaultLanguage = function() {
+        localStorage.removeItem('selectedLanguage');
+        const defaultLang = getDefaultLanguage();
+        console.log('Reset to default language:', defaultLang);
+        updateLanguage(defaultLang);
+      };
+      window.clearLanguageStorage = function() {
+        localStorage.removeItem('selectedLanguage');
+        console.log('Language storage cleared');
+      };
+    })();
+  </script>
+  
   <script>
     // Section snapping functionality with CSS transforms
     let currentSection = 0;
     let isTransitioning = false;
+    let lastWheelTime = 0;
     const main = document.querySelector('main');
     const sections = document.querySelectorAll('.hero, .content-section, .main-footer');
     
@@ -6357,7 +7557,7 @@
       // Reset transition lock
       setTimeout(() => {
         isTransitioning = false;
-      }, 800);
+      }, 600);
     }
     
     function updateActiveNav() {
@@ -6377,6 +7577,14 @@
       e.preventDefault();
       
       if (isTransitioning) return;
+      
+      // Debounce wheel events
+      const now = Date.now();
+      if (now - lastWheelTime < 50) return; // Minimum 50ms between wheel events
+      lastWheelTime = now;
+      
+      // Check for significant scroll
+      if (Math.abs(e.deltaY) < 5) return; // Ignore very small scroll movements
       
       if (e.deltaY > 0) {
         // Scroll down
@@ -6440,7 +7648,7 @@
       touchEndY = e.changedTouches[0].screenY;
       const diff = touchStartY - touchEndY;
       
-      if (Math.abs(diff) > 50) { // Minimum swipe distance
+      if (Math.abs(diff) > 30) { // Reduced minimum swipe distance
         if (diff > 0) {
           // Swipe up (scroll down)
           goToSection(currentSection + 1);

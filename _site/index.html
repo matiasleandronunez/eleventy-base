@@ -77,7 +77,7 @@
   <div class="hero-media">
     
       <video class="hero-video" autoplay muted loop playsinline >
-        <source src="/assets/DaniR_BG.mp4" type="video/mp4">
+        <source src="/assets/DaniR_BG.mov" type="video/mp4">
       </video>
     
   </div>
@@ -163,7 +163,13 @@
     
 
     <div class="hero-cta">
-      <a href="#contact" class="hero-bookings-link">Open bookings</a>
+      <a href="#contact" class="hero-bookings-link">
+        <div class="booking-beacon">
+          <div class="beacon-dot"></div>
+          <div class="beacon-pulse"></div>
+        </div>
+        Open bookings
+      </a>
       <span class="hero-separator" aria-hidden="true">|</span>
       
         <div class="hero-social">
@@ -320,6 +326,51 @@
   justify-content: center;
   gap: 1.25rem;
   margin: 0.75rem 0 0.75rem;
+}
+
+.booking-beacon {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.beacon-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.beacon-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
 }
 
 .hero-bookings-link {
@@ -7080,7 +7131,7 @@
     }
   },
   "hero": {
-    "video": "/assets/DaniR_BG.mp4",
+    "video": "/assets/DaniR_BG.mov",
     "profileImage": "/assets/images/daniR_avatar.png",
     "name": "DaniR",
     "subtitle": {

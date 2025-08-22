@@ -269,8 +269,8 @@
 
 .hero-language-selector {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: max(2rem, env(safe-area-inset-top, 2rem));
+  right: max(2rem, env(safe-area-inset-right, 2rem));
   z-index: 10;
 }
 
@@ -413,8 +413,35 @@
     margin-bottom: 1rem;
   }
   
+  .hero-language-selector {
+    top: max(1rem, env(safe-area-inset-top, 1rem));
+    right: max(1rem, env(safe-area-inset-right, 1rem));
+  }
+  
   .scroll-indicator {
     bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-language-selector {
+    top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+    right: max(0.75rem, env(safe-area-inset-right, 0.75rem));
+  }
+  
+  .hero-content {
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-language-selector {
+    top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
+    right: max(0.5rem, env(safe-area-inset-right, 0.5rem));
+  }
+  
+  .hero-content {
+    padding: 0 0.5rem;
   }
 }
 </style>
@@ -448,17 +475,17 @@
       <div class="release-links">
         
           <a href="https://open.spotify.com/album/1YRaIzWlrVgYnfFT22MPoH" class="release-icon-link" target="_blank" rel="noopener" aria-label="Spotify"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fab fa-spotify" aria-hidden="true"></i>
           </a>
         
           <a href="https://www.beatport.com/release/solar-path-ep/4989377" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
           <a href="https://soundcloud.com/danir_music/sets/solar-path-ep" class="release-icon-link" target="_blank" rel="noopener" aria-label="SoundCloud"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fab fa-soundcloud" aria-hidden="true"></i>
           </a>
         
@@ -479,17 +506,17 @@
       <div class="release-links">
         
           <a href="https://open.spotify.com/album/0MRC1n6XkMUved3pKzUyft" class="release-icon-link" target="_blank" rel="noopener" aria-label="Spotify"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fab fa-spotify" aria-hidden="true"></i>
           </a>
         
           <a href="https://www.beatport.com/release/midnight-motion-ep/4975524" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
           <a href="https://soundcloud.com/danir_music/sets/midnight-motion-ep" class="release-icon-link" target="_blank" rel="noopener" aria-label="SoundCloud"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fab fa-soundcloud" aria-hidden="true"></i>
           </a>
         
@@ -510,7 +537,7 @@
       <div class="release-links">
         
           <a href="https://www.beatport.com/release/dancing-together/5184663" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
@@ -531,7 +558,7 @@
       <div class="release-links">
         
           <a href="https://www.beatport.com/release/one-way/3994814" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
@@ -552,12 +579,12 @@
       <div class="release-links">
         
           <a href="https://open.spotify.com/album/64UkemhITtdhsAViUHiG4p" class="release-icon-link" target="_blank" rel="noopener" aria-label="Spotify"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fab fa-spotify" aria-hidden="true"></i>
           </a>
         
           <a href="https://www.beatport.com/release/villa-miami/3399142" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
@@ -578,7 +605,7 @@
       <div class="release-links">
         
           <a href="https://www.beatport.com/release/13-years-los-de-la-n/3330923" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
@@ -599,7 +626,7 @@
       <div class="release-links">
         
           <a href="https://www.beatport.com/release/house-music/1684276" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
@@ -620,12 +647,12 @@
       <div class="release-links">
         
           <a href="https://open.spotify.com/album/4EVS26mF1WV4AvE5xDh9gI" class="release-icon-link" target="_blank" rel="noopener" aria-label="Spotify"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fab fa-spotify" aria-hidden="true"></i>
           </a>
         
           <a href="https://www.beatport.com/release/shrek/3182148" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
@@ -646,7 +673,7 @@
       <div class="release-links">
         
           <a href="https://www.beatport.com/release/lezzzgo/4608993" class="release-icon-link" target="_blank" rel="noopener" aria-label="Beatport"
-             onclick="">
+             onclick="event.stopPropagation(); ">
             <i class="fas fa-headphones" aria-hidden="true"></i>
           </a>
         
@@ -681,9 +708,15 @@
               const cardWidthWithGap = cardWidth() + gapPx;
               const containerWidth = carousel.offsetWidth;
               
+              // Get actual carousel padding from computed styles
+              const carouselStyles = window.getComputedStyle(carousel);
+              const paddingLeft = parseFloat(carouselStyles.paddingLeft);
+              const paddingRight = parseFloat(carouselStyles.paddingRight);
+              const visibleWidth = containerWidth - paddingLeft - paddingRight;
+              
               // Calculate center position
               const cardCenter = index * cardWidthWithGap + cardWidth() / 2;
-              const containerCenter = containerWidth / 2;
+              const containerCenter = visibleWidth / 2;
               const translate = containerCenter - cardCenter;
               
               track.style.transform = `translateX(${translate}px)`;
@@ -706,10 +739,98 @@
             prev?.addEventListener('click', () => goTo(index - 1));
             next?.addEventListener('click', () => goTo(index + 1));
 
+            // Touch/swipe support for mobile
+            let startX = 0;
+            let currentX = 0;
+            let isDragging = false;
+            
+            // Make isDragging accessible to other scripts
+            window.releasesCarouselIsDragging = false;
+
+            track.addEventListener('touchstart', (e) => {
+              // Don't start dragging if clicking on a card or its overlay
+              if (e.target.closest('.release-card') || e.target.closest('.release-overlay') || e.target.closest('.release-icon-link')) {
+                return;
+              }
+              
+              startX = e.touches[0].clientX;
+              isDragging = true;
+              window.releasesCarouselIsDragging = true;
+              track.style.transition = 'none';
+            });
+
+            track.addEventListener('touchmove', (e) => {
+              if (!isDragging) return;
+              
+              // Don't move if touching a card or its overlay
+              if (e.target.closest('.release-card') || e.target.closest('.release-overlay') || e.target.closest('.release-icon-link')) {
+                return;
+              }
+              
+              e.preventDefault();
+              currentX = e.touches[0].clientX;
+              const diff = currentX - startX;
+              const cardWidthWithGap = cardWidth() + gapPx;
+              const containerWidth = carousel.offsetWidth;
+              
+              // Get actual carousel padding from computed styles
+              const carouselStyles = window.getComputedStyle(carousel);
+              const paddingLeft = parseFloat(carouselStyles.paddingLeft);
+              const paddingRight = parseFloat(carouselStyles.paddingRight);
+              const visibleWidth = containerWidth - paddingLeft - paddingRight;
+              
+              const cardCenter = index * cardWidthWithGap + cardWidth() / 2;
+              const containerCenter = visibleWidth / 2;
+              const baseTranslate = containerCenter - cardCenter;
+              
+              track.style.transform = `translateX(${baseTranslate + diff}px)`;
+            });
+
+            track.addEventListener('touchend', (e) => {
+              if (!isDragging) return;
+              
+              // Don't process if touching a card or its overlay
+              if (e.target.closest('.release-card') || e.target.closest('.release-overlay') || e.target.closest('.release-icon-link')) {
+                isDragging = false;
+                window.releasesCarouselIsDragging = false;
+                return;
+              }
+              
+              isDragging = false;
+              window.releasesCarouselIsDragging = false;
+              track.style.transition = 'transform 0.4s ease';
+              
+              const diff = currentX - startX;
+              const threshold = 50; // minimum swipe distance
+              
+              if (Math.abs(diff) > threshold) {
+                if (diff > 0 && index > 0) {
+                  // Swipe right - go to previous
+                  goTo(index - 1);
+                } else if (diff < 0 && index < cards.length - 1) {
+                  // Swipe left - go to next
+                  goTo(index + 1);
+                } else {
+                  // Bounce back to current position
+                  applyTransform();
+                }
+              } else {
+                // Bounce back to current position
+                applyTransform();
+              }
+            });
+
             window.addEventListener('resize', applyTransform);
 
-            // Initialize
-            applyTransform();
+            // Initialize with a delay to ensure DOM is ready
+            setTimeout(() => {
+              applyTransform();
+            }, 100);
+            
+            // Also initialize after images load
+            window.addEventListener('load', () => {
+              applyTransform();
+            });
           })();
         </script>
         <script>
@@ -725,8 +846,17 @@
               // Mobile behavior - click to toggle
               releaseCards.forEach(card => {
                 card.addEventListener('click', function(e) {
+                  // Prevent any default behavior and stop event propagation
+                  e.preventDefault();
+                  e.stopPropagation();
+                  
                   // If clicking on a link, don't toggle the overlay
                   if (e.target.closest('.release-icon-link')) {
+                    return;
+                  }
+                  
+                  // Don't toggle if carousel is being dragged
+                  if (window.releasesCarouselIsDragging) {
                     return;
                   }
                   

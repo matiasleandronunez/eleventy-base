@@ -226,8 +226,7 @@
 
 <style>
 .hero {
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  height: 100vh;
   position: relative;
   display: flex;
   align-items: center;
@@ -407,6 +406,9 @@
   
   .hero-content {
     padding: 0 1rem;
+    /* Account for mobile browser UI */
+    padding-top: max(1rem, env(safe-area-inset-top, 1rem));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
   }
   
   .hero-logo {
@@ -432,6 +434,9 @@
   
   .hero-content {
     padding: 0 0.75rem;
+    /* Account for mobile browser UI */
+    padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
   }
 }
 
@@ -702,23 +707,32 @@
             const next = carousel.querySelector('.carousel-btn.next');
             const cards = Array.from(track.querySelectorAll('.release-card'));
             const gapPx = 16; // 1rem gap
-            const cardWidth = () => cards[0]?.getBoundingClientRect().width || 0;
+            // Cache the card width to ensure consistency
+            let cachedCardWidth = 0;
+            const cardWidth = () => {
+              if (cachedCardWidth === 0) {
+                cachedCardWidth = Math.round(cards[0]?.getBoundingClientRect().width || 0);
+              }
+              return cachedCardWidth;
+            };
             let index = 0;
 
             function applyTransform() {
+              // Simple approach: just move the track by the card width + gap for each step
               const cardWidthWithGap = cardWidth() + gapPx;
-              const containerWidth = carousel.offsetWidth;
               
-              // Get actual carousel padding from computed styles
+              // Calculate initial offset to center the first card
+              const containerWidth = carousel.offsetWidth;
               const carouselStyles = window.getComputedStyle(carousel);
               const paddingLeft = parseFloat(carouselStyles.paddingLeft);
               const paddingRight = parseFloat(carouselStyles.paddingRight);
               const visibleWidth = containerWidth - paddingLeft - paddingRight;
+              const initialOffset = (visibleWidth - cardWidth()) / 2;
               
-              // Calculate center position
-              const cardCenter = index * cardWidthWithGap + cardWidth() / 2;
-              const containerCenter = visibleWidth / 2;
-              const translate = containerCenter - cardCenter;
+              const translate = initialOffset - (index * cardWidthWithGap);
+              
+              // Debug logging
+              console.log(`Card ${index}: cardWidth=${cardWidth()}, cardWidthWithGap=${cardWidthWithGap}, initialOffset=${initialOffset}, translate=${translate}`);
               
               track.style.transform = `translateX(${translate}px)`;
             }
@@ -772,17 +786,16 @@
               currentX = e.touches[0].clientX;
               const diff = currentX - startX;
               const cardWidthWithGap = cardWidth() + gapPx;
-              const containerWidth = carousel.offsetWidth;
               
-              // Get actual carousel padding from computed styles
+              // Calculate initial offset to center the first card
+              const containerWidth = carousel.offsetWidth;
               const carouselStyles = window.getComputedStyle(carousel);
               const paddingLeft = parseFloat(carouselStyles.paddingLeft);
               const paddingRight = parseFloat(carouselStyles.paddingRight);
               const visibleWidth = containerWidth - paddingLeft - paddingRight;
+              const initialOffset = (visibleWidth - cardWidth()) / 2;
               
-              const cardCenter = index * cardWidthWithGap + cardWidth() / 2;
-              const containerCenter = visibleWidth / 2;
-              const baseTranslate = containerCenter - cardCenter;
+              const baseTranslate = initialOffset - (index * cardWidthWithGap);
               
               track.style.transform = `translateX(${baseTranslate + diff}px)`;
             });
@@ -821,7 +834,11 @@
               }
             });
 
-            window.addEventListener('resize', applyTransform);
+            window.addEventListener('resize', () => {
+              // Reset cached width on resize
+              cachedCardWidth = 0;
+              applyTransform();
+            });
 
             // Initialize with a delay to ensure DOM is ready
             setTimeout(() => {
@@ -895,8 +912,7 @@
 
 <style>
 .content-section {
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -1399,6 +1415,9 @@
   transform: translateX(0);
   transition: transform 0.4s ease;
   will-change: transform;
+  /* Center the track within the container */
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .release-card {
@@ -1803,6 +1822,9 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Account for mobile browser UI */
+    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -1873,6 +1895,9 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
+    /* Account for mobile browser UI */
+    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -2164,8 +2189,7 @@
 
 <style>
 .content-section {
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -2668,6 +2692,9 @@
   transform: translateX(0);
   transition: transform 0.4s ease;
   will-change: transform;
+  /* Center the track within the container */
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .release-card {
@@ -3072,6 +3099,9 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Account for mobile browser UI */
+    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -3142,6 +3172,9 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
+    /* Account for mobile browser UI */
+    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -3303,8 +3336,7 @@
 
 <style>
 .content-section {
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -3807,6 +3839,9 @@
   transform: translateX(0);
   transition: transform 0.4s ease;
   will-change: transform;
+  /* Center the track within the container */
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .release-card {
@@ -4211,6 +4246,9 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Account for mobile browser UI */
+    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -4281,6 +4319,9 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
+    /* Account for mobile browser UI */
+    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -4494,8 +4535,7 @@
 
 <style>
 .content-section {
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -4998,6 +5038,9 @@
   transform: translateX(0);
   transition: transform 0.4s ease;
   will-change: transform;
+  /* Center the track within the container */
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .release-card {
@@ -5402,6 +5445,9 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Account for mobile browser UI */
+    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -5472,6 +5518,9 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
+    /* Account for mobile browser UI */
+    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -5659,8 +5708,7 @@
 
 <style>
 .content-section {
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Dynamic viewport height for modern browsers */
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -6163,6 +6211,9 @@
   transform: translateX(0);
   transition: transform 0.4s ease;
   will-change: transform;
+  /* Center the track within the container */
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .release-card {
@@ -6567,6 +6618,9 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Account for mobile browser UI */
+    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -6637,6 +6691,9 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
+    /* Account for mobile browser UI */
+    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {

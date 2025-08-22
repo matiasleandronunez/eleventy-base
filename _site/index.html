@@ -865,8 +865,13 @@
                   e.preventDefault();
                   e.stopPropagation();
                   
-                  // If clicking on a link, don't toggle the overlay
+                  // If clicking on a link, only allow if card is active
                   if (e.target.closest('.release-icon-link')) {
+                    if (!this.classList.contains('active')) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      return;
+                    }
                     return;
                   }
                   
@@ -1480,12 +1485,14 @@
   /* Disable links until card is active */
   .release-card:not(.active) .release-icon-link {
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0;
+    cursor: default;
   }
   
   .release-card.active .release-icon-link {
     pointer-events: auto;
     opacity: 1;
+    cursor: pointer;
   }
   
   /* Visual feedback for active card */
@@ -2753,12 +2760,14 @@
   /* Disable links until card is active */
   .release-card:not(.active) .release-icon-link {
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0;
+    cursor: default;
   }
   
   .release-card.active .release-icon-link {
     pointer-events: auto;
     opacity: 1;
+    cursor: pointer;
   }
   
   /* Visual feedback for active card */
@@ -3896,12 +3905,14 @@
   /* Disable links until card is active */
   .release-card:not(.active) .release-icon-link {
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0;
+    cursor: default;
   }
   
   .release-card.active .release-icon-link {
     pointer-events: auto;
     opacity: 1;
+    cursor: pointer;
   }
   
   /* Visual feedback for active card */
@@ -5091,12 +5102,14 @@
   /* Disable links until card is active */
   .release-card:not(.active) .release-icon-link {
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0;
+    cursor: default;
   }
   
   .release-card.active .release-icon-link {
     pointer-events: auto;
     opacity: 1;
+    cursor: pointer;
   }
   
   /* Visual feedback for active card */
@@ -6260,12 +6273,14 @@
   /* Disable links until card is active */
   .release-card:not(.active) .release-icon-link {
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0;
+    cursor: default;
   }
   
   .release-card.active .release-icon-link {
     pointer-events: auto;
     opacity: 1;
+    cursor: pointer;
   }
   
   /* Visual feedback for active card */

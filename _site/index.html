@@ -230,8 +230,6 @@
 <style>
 .hero {
   height: 100vh;
-  height: 100svh; /* Small viewport height - excludes browser UI */
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   position: relative;
   display: flex;
   align-items: center;
@@ -912,8 +910,6 @@
 <style>
 .content-section {
   height: 100vh;
-  height: 100svh; /* Small viewport height - excludes browser UI */
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -1823,6 +1819,8 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Better mobile handling - use full viewport but adjust content positioning */
+    min-height: 100vh;
   }
   
   .section-header {
@@ -1892,7 +1890,7 @@
 @media (max-width: 480px) {
   .content-section {
     padding: 2rem 0;
-    min-height: auto;
+    min-height: 100vh;
   }
   
   .container {
@@ -2185,8 +2183,6 @@
 <style>
 .content-section {
   height: 100vh;
-  height: 100svh; /* Small viewport height - excludes browser UI */
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -3096,6 +3092,8 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Better mobile handling - use full viewport but adjust content positioning */
+    min-height: 100vh;
   }
   
   .section-header {
@@ -3165,7 +3163,7 @@
 @media (max-width: 480px) {
   .content-section {
     padding: 2rem 0;
-    min-height: auto;
+    min-height: 100vh;
   }
   
   .container {
@@ -3328,8 +3326,6 @@
 <style>
 .content-section {
   height: 100vh;
-  height: 100svh; /* Small viewport height - excludes browser UI */
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -4239,6 +4235,8 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Better mobile handling - use full viewport but adjust content positioning */
+    min-height: 100vh;
   }
   
   .section-header {
@@ -4308,7 +4306,7 @@
 @media (max-width: 480px) {
   .content-section {
     padding: 2rem 0;
-    min-height: auto;
+    min-height: 100vh;
   }
   
   .container {
@@ -4523,8 +4521,6 @@
 <style>
 .content-section {
   height: 100vh;
-  height: 100svh; /* Small viewport height - excludes browser UI */
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -5434,6 +5430,8 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Better mobile handling - use full viewport but adjust content positioning */
+    min-height: 100vh;
   }
   
   .section-header {
@@ -5503,7 +5501,7 @@
 @media (max-width: 480px) {
   .content-section {
     padding: 2rem 0;
-    min-height: auto;
+    min-height: 100vh;
   }
   
   .container {
@@ -5692,8 +5690,6 @@
 <style>
 .content-section {
   height: 100vh;
-  height: 100svh; /* Small viewport height - excludes browser UI */
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -6603,6 +6599,8 @@
   
   .content-section {
     padding: 3rem 0;
+    /* Better mobile handling - use full viewport but adjust content positioning */
+    min-height: 100vh;
   }
   
   .section-header {
@@ -6672,7 +6670,7 @@
 @media (max-width: 480px) {
   .content-section {
     padding: 2rem 0;
-    min-height: auto;
+    min-height: 100vh;
   }
   
   .container {

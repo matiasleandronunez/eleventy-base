@@ -272,8 +272,8 @@
 
 .hero-language-selector {
   position: absolute;
-  top: max(2rem, env(safe-area-inset-top, 2rem));
-  right: max(2rem, env(safe-area-inset-right, 2rem));
+  top: 2rem;
+  right: 2rem;
   z-index: 10;
 }
 
@@ -417,8 +417,8 @@
   }
   
   .hero-language-selector {
-    top: max(1rem, env(safe-area-inset-top, 1rem));
-    right: max(1rem, env(safe-area-inset-right, 1rem));
+    top: 1rem;
+    right: 1rem;
   }
   
   .scroll-indicator {
@@ -428,8 +428,8 @@
 
 @media (max-width: 480px) {
   .hero-language-selector {
-    top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
-    right: max(0.75rem, env(safe-area-inset-right, 0.75rem));
+    top: 0.75rem;
+    right: 0.75rem;
   }
   
   .hero-content {
@@ -439,8 +439,8 @@
 
 @media (max-width: 360px) {
   .hero-language-selector {
-    top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
-    right: max(0.5rem, env(safe-area-inset-right, 0.5rem));
+    top: 0.5rem;
+    right: 0.5rem;
   }
   
   .hero-content {
@@ -7690,6 +7690,9 @@
         
         if (isInitialized) return;
         
+        const languageSelectors = document.querySelectorAll('.language-selector');
+        console.log('Found language selectors:', languageSelectors.length);
+        
         const langButtons = document.querySelectorAll('.lang-btn');
         console.log('Found lang buttons:', langButtons.length);
         if (langButtons.length === 0) {
@@ -7837,7 +7840,7 @@
         }
       });
     });
-    
+
     // Touch support for mobile
     let touchStartY = 0;
     let touchEndY = 0;

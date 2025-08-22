@@ -95,6 +95,9 @@
          <button class="lang-btn " data-lang="fr" aria-label="Français">
            🇫🇷
          </button>
+         <button class="lang-btn " data-lang="de" aria-label="Deutsch">
+           🇩🇪
+         </button>
        </div>
 
 <style>
@@ -227,6 +230,8 @@
 <style>
 .hero {
   height: 100vh;
+  height: 100svh; /* Small viewport height - excludes browser UI */
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   position: relative;
   display: flex;
   align-items: center;
@@ -406,9 +411,6 @@
   
   .hero-content {
     padding: 0 1rem;
-    /* Account for mobile browser UI */
-    padding-top: max(1rem, env(safe-area-inset-top, 1rem));
-    padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
   }
   
   .hero-logo {
@@ -434,9 +436,6 @@
   
   .hero-content {
     padding: 0 0.75rem;
-    /* Account for mobile browser UI */
-    padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
-    padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
   }
 }
 
@@ -913,6 +912,8 @@
 <style>
 .content-section {
   height: 100vh;
+  height: 100svh; /* Small viewport height - excludes browser UI */
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -944,7 +945,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #fff);
+  background: linear-gradient(45deg, #fff, #00ff88);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1822,9 +1823,6 @@
   
   .content-section {
     padding: 3rem 0;
-    /* Account for mobile browser UI */
-    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
-    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -1895,9 +1893,6 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
-    /* Account for mobile browser UI */
-    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
-    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -2190,6 +2185,8 @@
 <style>
 .content-section {
   height: 100vh;
+  height: 100svh; /* Small viewport height - excludes browser UI */
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -2221,7 +2218,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #fff);
+  background: linear-gradient(45deg, #fff, #00ff88);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3099,9 +3096,6 @@
   
   .content-section {
     padding: 3rem 0;
-    /* Account for mobile browser UI */
-    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
-    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -3172,9 +3166,6 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
-    /* Account for mobile browser UI */
-    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
-    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -3337,6 +3328,8 @@
 <style>
 .content-section {
   height: 100vh;
+  height: 100svh; /* Small viewport height - excludes browser UI */
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -3368,7 +3361,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #fff);
+  background: linear-gradient(45deg, #fff, #00ff88);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -4246,9 +4239,6 @@
   
   .content-section {
     padding: 3rem 0;
-    /* Account for mobile browser UI */
-    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
-    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -4319,9 +4309,6 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
-    /* Account for mobile browser UI */
-    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
-    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -4536,6 +4523,8 @@
 <style>
 .content-section {
   height: 100vh;
+  height: 100svh; /* Small viewport height - excludes browser UI */
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -4567,7 +4556,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #fff);
+  background: linear-gradient(45deg, #fff, #00ff88);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -5445,9 +5434,6 @@
   
   .content-section {
     padding: 3rem 0;
-    /* Account for mobile browser UI */
-    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
-    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -5518,9 +5504,6 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
-    /* Account for mobile browser UI */
-    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
-    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -5709,6 +5692,8 @@
 <style>
 .content-section {
   height: 100vh;
+  height: 100svh; /* Small viewport height - excludes browser UI */
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Fallback for older browsers */
   display: flex;
   align-items: center;
   position: relative;
@@ -5740,7 +5725,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin: 0 0 1rem 0;
-  background: linear-gradient(45deg, #fff, #fff);
+  background: linear-gradient(45deg, #fff, #00ff88);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -6618,9 +6603,6 @@
   
   .content-section {
     padding: 3rem 0;
-    /* Account for mobile browser UI */
-    padding-top: max(3rem, env(safe-area-inset-top, 3rem));
-    padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
   }
   
   .section-header {
@@ -6691,9 +6673,6 @@
   .content-section {
     padding: 2rem 0;
     min-height: auto;
-    /* Account for mobile browser UI */
-    padding-top: max(2rem, env(safe-area-inset-top, 2rem));
-    padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   }
   
   .container {
@@ -6879,6 +6858,9 @@
          <button class="lang-btn " data-lang="fr" aria-label="Français">
            🇫🇷
          </button>
+         <button class="lang-btn " data-lang="de" aria-label="Deutsch">
+           🇩🇪
+         </button>
        </div>
 
 <style>
@@ -7058,12 +7040,14 @@
     "title": {
       "en": "DaniR | Official Website",
       "es": "DaniR | Sitio Oficial",
-      "fr": "DaniR | Site Officiel"
+      "fr": "DaniR | Site Officiel",
+      "de": "DaniR | Offizielle Website"
     },
     "description": {
       "en": "Electronic Music Producer & DJ",
       "es": "Productor y DJ de Música Electrónica",
-      "fr": "Producteur et DJ de Musique Électronique"
+      "fr": "Producteur et DJ de Musique Électronique",
+      "de": "Elektronischer Musikproduzent & DJ"
     },
     "url": "",
     "author": "Hypear"
@@ -7089,12 +7073,14 @@
     "subtitle": {
       "en": "Electronic Music Producer & DJ",
       "es": "Productor y DJ de Música Electrónica",
-      "fr": "Producteur et DJ de Musique Électronique"
+      "fr": "Producteur et DJ de Musique Électronique",
+      "de": "Elektronischer Musikproduzent & DJ"
     },
     "scrollText": {
       "en": "Latest Music",
       "es": "Última Música",
-      "fr": "Dernière Musique"
+      "fr": "Dernière Musique",
+      "de": "Neueste Musik"
     }
   },
   "navigation": [
@@ -7102,7 +7088,8 @@
       "text": {
         "en": "Home",
         "es": "Inicio",
-        "fr": "Accueil"
+        "fr": "Accueil",
+        "de": "Startseite"
       },
       "href": "#hero"
     },
@@ -7110,7 +7097,8 @@
       "text": {
         "en": "Music",
         "es": "Música",
-        "fr": "Musique"
+        "fr": "Musique",
+        "de": "Musik"
       },
       "href": "#releases",
       "active": true
@@ -7119,7 +7107,8 @@
       "text": {
         "en": "Shows",
         "es": "Shows",
-        "fr": "Concerts"
+        "fr": "Concerts",
+        "de": "Shows"
       },
       "href": "#gigs"
     },
@@ -7127,7 +7116,8 @@
       "text": {
         "en": "Bio",
         "es": "Biografía",
-        "fr": "Biographie"
+        "fr": "Biographie",
+        "de": "Biografie"
       },
       "href": "#bio"
     },
@@ -7135,7 +7125,8 @@
       "text": {
         "en": "Press",
         "es": "Prensa",
-        "fr": "Presse"
+        "fr": "Presse",
+        "de": "Presse"
       },
       "href": "#interviews"
     },
@@ -7143,7 +7134,8 @@
       "text": {
         "en": "Contact",
         "es": "Contacto",
-        "fr": "Contact"
+        "fr": "Contact",
+        "de": "Kontakt"
       },
       "href": "#contact"
     }
@@ -7154,12 +7146,14 @@
       "title": {
         "en": "Latest Music",
         "es": "Última Música",
-        "fr": "Dernière Musique"
+        "fr": "Dernière Musique",
+        "de": "Neueste Musik"
       },
       "subtitle": {
         "en": "Supported by the best record labels and DJs",
         "es": "Apoyado por los mejores sellos discográficos y DJs",
-        "fr": "Soutenu par les meilleurs labels et DJs"
+        "fr": "Soutenu par les meilleurs labels et DJs",
+        "de": "Unterstützt von den besten Plattenlabels und DJs"
       },
       "type": "releases",
       "items": [
@@ -7323,12 +7317,14 @@
       "title": {
         "en": "Next Gigs",
         "es": "Próximos Shows",
-        "fr": "Prochains Concerts"
+        "fr": "Prochains Concerts",
+        "de": "Nächste Gigs"
       },
       "subtitle": {
         "en": "Ready?",
         "es": "¿Listo?",
-        "fr": "Prêt ?"
+        "fr": "Prêt ?",
+        "de": "Bereit?"
       },
       "type": "events",
       "items": [
@@ -7337,12 +7333,14 @@
           "venue": {
             "en": "Club Paradise",
             "es": "Club Paradise",
-            "fr": "Club Paradise"
+            "fr": "Club Paradise",
+            "de": "Club Paradise"
           },
           "location": {
             "en": "Miami, FL, USA",
             "es": "Miami, FL, Estados Unidos",
-            "fr": "Miami, FL, États-Unis"
+            "fr": "Miami, FL, États-Unis",
+            "de": "Miami, FL, USA"
           },
           "image": "/assets/images/event_stock1.jpg",
           "ticketUrl": "#"
@@ -7352,12 +7350,14 @@
           "venue": {
             "en": "Warehouse Party",
             "es": "Warehouse Party",
-            "fr": "Warehouse Party"
+            "fr": "Warehouse Party",
+            "de": "Warehouse Party"
           },
           "location": {
             "en": "Berlin, Germany",
             "es": "Berlín, Alemania",
-            "fr": "Berlin, Allemagne"
+            "fr": "Berlin, Allemagne",
+            "de": "Berlin, Deutschland"
           },
           "image": "/assets/images/event_stock2.jpg",
           "ticketUrl": "#"
@@ -7367,12 +7367,14 @@
           "venue": {
             "en": "Zebra Club",
             "es": "Zebra Club",
-            "fr": "Zebra Club"
+            "fr": "Zebra Club",
+            "de": "Zebra Club"
           },
           "location": {
             "en": "Villa Carlos Paz, Argentina",
             "es": "Villa Carlos Paz, Argentina",
-            "fr": "Villa Carlos Paz, Argentine"
+            "fr": "Villa Carlos Paz, Argentine",
+            "de": "Villa Carlos Paz, Argentinien"
           },
           "image": "/assets/images/event_stock3.jpg",
           "ticketUrl": "#"
@@ -7382,12 +7384,14 @@
           "venue": {
             "en": "Zandanga",
             "es": "Zandanga",
-            "fr": "Zandanga"
+            "fr": "Zandanga",
+            "de": "Zandanga"
           },
           "location": {
             "en": "Lagos, Nigeria",
             "es": "Lagos, Nigeria",
-            "fr": "Lagos, Nigeria"
+            "fr": "Lagos, Nigeria",
+            "de": "Lagos, Nigeria"
           },
           "image": "/assets/images/event_stock4.jpg",
           "ticketUrl": "#"
@@ -7399,19 +7403,22 @@
       "title": {
         "en": "Bio",
         "es": "Biografía",
-        "fr": "Biographie"
+        "fr": "Biographie",
+        "de": "Biografie"
       },
       "subtitle": {
         "en": "",
         "es": "",
-        "fr": ""
+        "fr": "",
+        "de": ""
       },
       "background": "/assets/images/dark-blue-bg.jpg",
       "type": "text",
       "content": {
         "en": "Dani R born in Cordoba, Argentina. He is a producer Minimal / Minimal Deep - Tech in full growth. he began to be interested in music in his adolescence using the piano as a connector. In August 2019 he began his career as a DJ and in July 2020 as a producer. So much in his mixes as in his tracks, the cheerful synths predominate, classic house, generating a pleasant atmosphere, always preserving his minimalist bass to never lose the groove. In his short career as a producer he has been able to seal his music on labels such as NoPreset, Urban Garden, Fahren Lab, Mtion.",
         "es": "Dani R nacido en Córdoba, Argentina. Es un productor Minimal / Minimal Deep - Tech en pleno crecimiento. Comenzó a interesarse por la música en su adolescencia usando el piano como conector. En agosto de 2019 comenzó su carrera como DJ y en julio de 2020 como productor. Tanto en sus mezclas como en sus tracks, predominan los sintetizadores alegres, house clásico, generando una atmósfera agradable, siempre preservando su bajo minimalista para nunca perder el groove. En su corta carrera como productor ha podido sellar su música en sellos como NoPreset, Urban Garden, Fahren Lab, Mtion.",
-        "fr": "Dani R né à Cordoba, Argentine. Il est un producteur Minimal / Minimal Deep - Tech en pleine croissance. Il a commencé à s'intéresser à la musique dans son adolescence en utilisant le piano comme connecteur. En août 2019, il a commencé sa carrière de DJ et en juillet 2020 comme producteur. Tant dans ses mix que dans ses tracks, les synthétiseurs joyeux prédominent, house classique, générant une atmosphère agréable, préservant toujours sa basse minimaliste pour ne jamais perdre le groove. Dans sa courte carrière de producteur, il a pu sceller sa musique sur des labels comme NoPreset, Urban Garden, Fahren Lab, Mtion."
+        "fr": "Dani R né à Cordoba, Argentine. Il est un producteur Minimal / Minimal Deep - Tech en pleine croissance. Il a commencé à s'intéresser à la musique dans son adolescence en utilisant le piano comme connecteur. En août 2019, il a commencé sa carrière de DJ et en juillet 2020 comme producteur. Tant dans ses mix que dans ses tracks, les synthétiseurs joyeux prédominent, house classique, générant une atmosphère agréable, préservant toujours sa basse minimaliste pour ne jamais perdre le groove. Dans sa courte carrière de producteur, il a pu sceller sa musique sur des labels comme NoPreset, Urban Garden, Fahren Lab, Mtion.",
+        "de": "Dani R geboren in Cordoba, Argentinien. Er ist ein Minimal / Minimal Deep - Tech Produzent im vollen Wachstum. Er begann sich in seiner Jugend für Musik zu interessieren und nutzte das Klavier als Verbindung. Im August 2019 begann er seine Karriere als DJ und im Juli 2020 als Produzent. Sowohl in seinen Mixes als auch in seinen Tracks dominieren die fröhlichen Synths, klassischer House, die eine angenehme Atmosphäre erzeugen und dabei immer seinen minimalistischen Bass bewahren, um niemals den Groove zu verlieren. In seiner kurzen Karriere als Produzent konnte er seine Musik auf Labels wie NoPreset, Urban Garden, Fahren Lab, Mtion veröffentlichen."
       },
       "image": "/assets/images/daniR_photo2.jpg"
     },
@@ -7420,7 +7427,8 @@
       "title": {
         "en": "Press",
         "es": "Prensa",
-        "fr": "Presse"
+        "fr": "Presse",
+        "de": "Presse"
       },
       "type": "interviews",
       "enabled": true,
@@ -7444,12 +7452,14 @@
       "title": {
         "en": "Get In Touch",
         "es": "Contacto",
-        "fr": "Contact"
+        "fr": "Contact",
+        "de": "Kontakt"
       },
       "subtitle": {
         "en": "Bookings & collaborations",
         "es": "Reservas y colaboraciones",
-        "fr": "Réservations et collaborations"
+        "fr": "Réservations et collaborations",
+        "de": "Buchungen & Kooperationen"
       },
       "type": "contact",
       "email": "infopenbookings@gmail.com",
@@ -7485,12 +7495,14 @@
     "rights": {
       "en": "All rights reserved.",
       "es": "Todos los derechos reservados.",
-      "fr": "Tous droits réservés."
+      "fr": "Tous droits réservés.",
+      "de": "Alle Rechte vorbehalten."
     },
     "poweredBy": {
       "en": "Powered by",
       "es": "Desarrollado por",
-      "fr": "Propulsé par"
+      "fr": "Propulsé par",
+      "de": "Entwickelt von"
     }
   }
 };
@@ -7658,7 +7670,8 @@
               const locales = {
                 'en': 'en-US',
                 'es': 'es-ES', 
-                'fr': 'fr-FR'
+                'fr': 'fr-FR',
+                'de': 'de-DE'
               };
               const locale = locales[lang] || 'en-US';
               const date = new Date(eventsData[index].date);

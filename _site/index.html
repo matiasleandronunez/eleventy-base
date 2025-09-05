@@ -76,7 +76,7 @@
 <section id="hero" class="hero">
   <div class="hero-media">
     
-      <video class="hero-video" src="/assets/DaniR_BG.mov" type="video/mov" muted autoplay loop playsinline webkit-playsinline preload="auto" ></video>
+      <video class="hero-video" src="/assets/video/DaniR_BG.mov" type="video/mov" muted autoplay loop playsinline webkit-playsinline preload="auto" ></video>
       <script>
         // Safari mobile video autoplay fix
         (function() {
@@ -250,6 +250,11 @@
           <li>
             <a href="#gigs" class="hero-nav-link "
                onclick="">Shows</a>
+          </li>
+        
+          <li>
+            <a href="#multimedia" class="hero-nav-link "
+               onclick="">Multimedia</a>
           </li>
         
           <li>
@@ -547,14 +552,16 @@
   
   
   
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Última Música</h2>
+      <div class="container">
       
+        <div class="section-header">
+          <h2 class="section-title">Última Música</h2>
+          
+          
+            <p class="section-subtitle">Apoyado por los mejores sellos discográficos y DJs</p>
+          
+        </div>
       
-        <p class="section-subtitle">Apoyado por los mejores sellos discográficos y DJs</p>
-      
-    </div>
     
     <div class="section-content">
       
@@ -828,11 +835,11 @@
             function goTo(i) {
               if (!cards.length) return;
               
-              // Prevent going beyond bounds
+              // Handle infinite looping
               if (i < 0) {
-                index = 0;
+                index = cards.length - 1; // Loop to last item
               } else if (i >= cards.length) {
-                index = cards.length - 1;
+                index = 0; // Loop to first item
               } else {
                 index = i;
               }
@@ -905,18 +912,15 @@
               const diff = currentX - startX;
               const threshold = 50; // minimum swipe distance
               
-              if (Math.abs(diff) > threshold) {
-                if (diff > 0 && index > 0) {
-                  // Swipe right - go to previous
-                  goTo(index - 1);
-                } else if (diff < 0 && index < cards.length - 1) {
-                  // Swipe left - go to next
-                  goTo(index + 1);
+                              if (Math.abs(diff) > threshold) {
+                  if (diff > 0) {
+                    // Swipe right - go to previous (with infinite loop)
+                    goTo(index - 1);
+                  } else {
+                    // Swipe left - go to next (with infinite loop)
+                    goTo(index + 1);
+                  }
                 } else {
-                  // Bounce back to current position
-                  applyTransform();
-                }
-              } else {
                 // Bounce back to current position
                 applyTransform();
               }
@@ -1244,7 +1248,7 @@
   flex-direction: column;
   min-width: 420px;
   max-width: 420px;
-  aspect-ratio: 1 / 1.1;
+  height: 70vh;
   background: rgba(255,255,255,0.06);
   border-radius: 14px;
   overflow: hidden;
@@ -1254,10 +1258,8 @@
 
 .carousel-image {
   position: relative;
-  flex: 0 0 30%;
-  aspect-ratio: 16 / 9;
+  flex: 1;
   overflow: hidden;
-  min-height: 320px;
 }
 
 .carousel-image img {
@@ -1274,13 +1276,16 @@
   padding: 0.75rem 1rem;
   min-height: 0;
   position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  text-align: left;
 }
 
 .carousel-date {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 600;
   font-size: 15px;
-  color: rgba(230,241,255,0.9);
+  color: rgba(230,241,255,1);
 }
 
 .carousel-venue {
@@ -1308,7 +1313,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   border: 1px solid rgba(255,255,255,0.18);
   color: #e6f1ff;
   text-decoration: none;
@@ -1320,7 +1325,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 400;
   font-size: 15px;
-  opacity: 0.85;
+  opacity: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1391,21 +1396,16 @@
   }
   
   .carousel-image {
+    flex: 1;
     min-height: 200px;
-    flex: 0 0 70%;
   }
   
   .carousel-info {
     padding: 0.5rem 0.75rem;
     gap: 0.3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
     text-align: left;
-    min-height: 0;
-    flex: 1;
-    position: relative;
   }
   
   .carousel-venue {
@@ -1883,6 +1883,306 @@
   color: #ccc;
 }
 
+/* Presskit Section */
+.presskit-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.presskit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  background: linear-gradient(45deg, #00cc6a, #00ff88);
+}
+
+.presskit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn i {
+  font-size: 1.2rem;
+}
+
+/* Multimedia Carousel */
+.multimedia-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+
+.multimedia-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-item {
+  position: absolute;
+  width: 60%;
+  max-width: 400px;
+  height: 90%;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.multimedia-image,
+.multimedia-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.multimedia-image img,
+.multimedia-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.multimedia-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.multimedia-item:hover .multimedia-overlay,
+.multimedia-overlay:focus-within {
+  opacity: 1;
+}
+
+.multimedia-overlay .play-video-btn {
+  pointer-events: auto;
+}
+
+.multimedia-info {
+  text-align: center;
+  color: white;
+}
+
+.multimedia-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.play-video-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.play-video-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.play-video-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.multimedia-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 21;
+}
+
+.multimedia-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.multimedia-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-btn:focus {
+  outline: 2px solid #00ff88;
+  outline-offset: 2px;
+}
+
+.multimedia-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #00ff88;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .multimedia-overlay {
+    opacity: 1;
+  }
+  
+  .play-video-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    border-width: 3px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 80%;
+    height: 90%;
+  }
+  
+  .multimedia-controls {
+    padding: 0 1rem;
+  }
+  
+  .multimedia-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 90%;
+    height: 90%;
+  }
+  
+  .multimedia-title {
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-width: 3px;
+  }
+}
+
 .social-links {
   display: flex;
   justify-content: center;
@@ -2101,6 +2401,12 @@
     padding: 0 2.5rem;
   }
   
+  .carousel-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 70vh;
+  }
+  
   .releases-carousel {
     padding: 0 2.5rem;
   }
@@ -2120,14 +2426,16 @@
   
   
   
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Próximos Shows</h2>
+      <div class="container">
       
+        <div class="section-header">
+          <h2 class="section-title">Próximos Shows</h2>
+          
+          
+            <p class="section-subtitle">¿Listo?</p>
+          
+        </div>
       
-        <p class="section-subtitle">¿Listo?</p>
-      
-    </div>
     
     <div class="section-content">
       
@@ -2139,14 +2447,14 @@
             
               <div class="carousel-card">
   <div class="carousel-image">
-    <img src="/assets/images/event_stock1.jpg" alt="Club Paradise" loading="lazy">
+    <img src="/assets/images/gig3.jpg" alt="Resistencia Club" loading="lazy">
   </div>
   <div class="carousel-info">
-    <div class="carousel-date">15 de septiembre de 2025</div>
+    <div class="carousel-date">16 de mayo de 2025</div>
     <div class="carousel-venue-row">
-      <div class="carousel-venue">Club Paradise</div>
+      <div class="carousel-venue">Resistencia Club</div>
     </div>
-    <div class="carousel-location">Miami, FL, Estados Unidos</div>
+    <div class="carousel-location">Cordoba, Argentina</div>
     
       <a href="#" class="carousel-ticket-icon" target="_blank" rel="noopener" aria-label="Tickets" 
          onclick="">
@@ -2160,14 +2468,14 @@
             
               <div class="carousel-card">
   <div class="carousel-image">
-    <img src="/assets/images/event_stock2.jpg" alt="Warehouse Party" loading="lazy">
+    <img src="/assets/images/gig2.jpg" alt="Resistencia Club" loading="lazy">
   </div>
   <div class="carousel-info">
-    <div class="carousel-date">1 de octubre de 2025</div>
+    <div class="carousel-date">13 de junio de 2025</div>
     <div class="carousel-venue-row">
-      <div class="carousel-venue">Warehouse Party</div>
+      <div class="carousel-venue">Resistencia Club</div>
     </div>
-    <div class="carousel-location">Berlín, Alemania</div>
+    <div class="carousel-location">Cordoba, Argentina</div>
     
       <a href="#" class="carousel-ticket-icon" target="_blank" rel="noopener" aria-label="Tickets" 
          onclick="">
@@ -2181,35 +2489,14 @@
             
               <div class="carousel-card">
   <div class="carousel-image">
-    <img src="/assets/images/event_stock3.jpg" alt="Zebra Club" loading="lazy">
+    <img src="/assets/images/gig1.jpg" alt="Club Bela" loading="lazy">
   </div>
   <div class="carousel-info">
-    <div class="carousel-date">8 de octubre de 2025</div>
+    <div class="carousel-date">28 de agosto de 2025</div>
     <div class="carousel-venue-row">
-      <div class="carousel-venue">Zebra Club</div>
+      <div class="carousel-venue">Club Bela</div>
     </div>
-    <div class="carousel-location">Villa Carlos Paz, Argentina</div>
-    
-      <a href="#" class="carousel-ticket-icon" target="_blank" rel="noopener" aria-label="Tickets" 
-         onclick="">
-        <i class="fas fa-ticket"></i>
-      </a>
-    
-  </div>
-</div>
-
-
-            
-              <div class="carousel-card">
-  <div class="carousel-image">
-    <img src="/assets/images/event_stock4.jpg" alt="Zandanga" loading="lazy">
-  </div>
-  <div class="carousel-info">
-    <div class="carousel-date">15 de octubre de 2025</div>
-    <div class="carousel-venue-row">
-      <div class="carousel-venue">Zandanga</div>
-    </div>
-    <div class="carousel-location">Lagos, Nigeria</div>
+    <div class="carousel-location">Cordoba, Argentina</div>
     
       <a href="#" class="carousel-ticket-icon" target="_blank" rel="noopener" aria-label="Tickets" 
          onclick="">
@@ -2519,7 +2806,7 @@
   flex-direction: column;
   min-width: 420px;
   max-width: 420px;
-  aspect-ratio: 1 / 1.1;
+  height: 70vh;
   background: rgba(255,255,255,0.06);
   border-radius: 14px;
   overflow: hidden;
@@ -2529,10 +2816,8 @@
 
 .carousel-image {
   position: relative;
-  flex: 0 0 30%;
-  aspect-ratio: 16 / 9;
+  flex: 1;
   overflow: hidden;
-  min-height: 320px;
 }
 
 .carousel-image img {
@@ -2549,13 +2834,16 @@
   padding: 0.75rem 1rem;
   min-height: 0;
   position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  text-align: left;
 }
 
 .carousel-date {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 600;
   font-size: 15px;
-  color: rgba(230,241,255,0.9);
+  color: rgba(230,241,255,1);
 }
 
 .carousel-venue {
@@ -2583,7 +2871,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   border: 1px solid rgba(255,255,255,0.18);
   color: #e6f1ff;
   text-decoration: none;
@@ -2595,7 +2883,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 400;
   font-size: 15px;
-  opacity: 0.85;
+  opacity: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2666,21 +2954,16 @@
   }
   
   .carousel-image {
+    flex: 1;
     min-height: 200px;
-    flex: 0 0 70%;
   }
   
   .carousel-info {
     padding: 0.5rem 0.75rem;
     gap: 0.3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
     text-align: left;
-    min-height: 0;
-    flex: 1;
-    position: relative;
   }
   
   .carousel-venue {
@@ -3158,6 +3441,306 @@
   color: #ccc;
 }
 
+/* Presskit Section */
+.presskit-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.presskit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  background: linear-gradient(45deg, #00cc6a, #00ff88);
+}
+
+.presskit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn i {
+  font-size: 1.2rem;
+}
+
+/* Multimedia Carousel */
+.multimedia-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+
+.multimedia-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-item {
+  position: absolute;
+  width: 60%;
+  max-width: 400px;
+  height: 90%;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.multimedia-image,
+.multimedia-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.multimedia-image img,
+.multimedia-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.multimedia-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.multimedia-item:hover .multimedia-overlay,
+.multimedia-overlay:focus-within {
+  opacity: 1;
+}
+
+.multimedia-overlay .play-video-btn {
+  pointer-events: auto;
+}
+
+.multimedia-info {
+  text-align: center;
+  color: white;
+}
+
+.multimedia-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.play-video-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.play-video-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.play-video-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.multimedia-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 21;
+}
+
+.multimedia-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.multimedia-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-btn:focus {
+  outline: 2px solid #00ff88;
+  outline-offset: 2px;
+}
+
+.multimedia-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #00ff88;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .multimedia-overlay {
+    opacity: 1;
+  }
+  
+  .play-video-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    border-width: 3px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 80%;
+    height: 90%;
+  }
+  
+  .multimedia-controls {
+    padding: 0 1rem;
+  }
+  
+  .multimedia-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 90%;
+    height: 90%;
+  }
+  
+  .multimedia-title {
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-width: 3px;
+  }
+}
+
 .social-links {
   display: flex;
   justify-content: center;
@@ -3376,6 +3959,12 @@
     padding: 0 2.5rem;
   }
   
+  .carousel-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 70vh;
+  }
+  
   .releases-carousel {
     padding: 0 2.5rem;
   }
@@ -3390,34 +3979,288 @@
   
 
   
-    <section id="bio" class="content-section text-section" 
-         style="background-image: url('/assets/images/dark-blue-bg.jpg')">
+    <section id="multimedia" class="content-section multimedia-section" 
+         >
   
   
-    <div class="section-overlay"></div>
   
-  
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Biografía</h2>
+      <div class="container">
       
-      
-    </div>
     
     <div class="section-content">
       
       
-        <div class="bio-content">
-          
-            <div class="bio-image">
-              <img src="/assets/images/daniR_photo2.jpg" alt="Bio photo" loading="lazy">
+        <div class="multimedia-carousel">
+          <div class="multimedia-container">
+            <div class="multimedia-track">
+              
+                <div class="multimedia-item" data-type="image" data-index="0">
+                  
+                    <div class="multimedia-image">
+                      <img src="/assets/images/multi1.jpg" alt="DaniR in studio session" loading="lazy">
+                      <div class="multimedia-overlay">
+                        <div class="multimedia-info">
+                          <h3 class="multimedia-title">Studio Session</h3>
+                        </div>
+                      </div>
+                    </div>
+                  
+                </div>
+              
+                <div class="multimedia-item" data-type="image" data-index="1">
+                  
+                    <div class="multimedia-image">
+                      <img src="/assets/images/multi2.jpg" alt="DaniR in studio session" loading="lazy">
+                      <div class="multimedia-overlay">
+                        <div class="multimedia-info">
+                          <h3 class="multimedia-title">Studio Session</h3>
+                        </div>
+                      </div>
+                    </div>
+                  
+                </div>
+              
+                <div class="multimedia-item" data-type="image" data-index="2">
+                  
+                    <div class="multimedia-image">
+                      <img src="/assets/images/multi3.jpg" alt="DaniR in studio session" loading="lazy">
+                      <div class="multimedia-overlay">
+                        <div class="multimedia-info">
+                          <h3 class="multimedia-title">Studio Session</h3>
+                        </div>
+                      </div>
+                    </div>
+                  
+                </div>
+              
+                <div class="multimedia-item" data-type="video" data-index="3">
+                  
+                    <div class="multimedia-video">
+                      <video 
+                        src="/assets/video/multi4.mp4" 
+                        poster="" 
+                        preload="metadata"
+                        loop
+                        playsinline>
+                        Your browser does not support the video tag.
+                      </video>
+                      <div class="multimedia-overlay">
+                        <div class="multimedia-info">
+                          <h3 class="multimedia-title">Studio Session</h3>
+                          <button class="play-video-btn" aria-label="Play video">
+                            <i class="fas fa-play"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  
+                </div>
+              
             </div>
-          
-          <div class="bio-text">
-            <p>Dani R nacido en Córdoba, Argentina. Es un productor Minimal / Minimal Deep - Tech en pleno crecimiento. Comenzó a interesarse por la música en su adolescencia usando el piano como conector. En agosto de 2019 comenzó su carrera como DJ y en julio de 2020 como productor. Tanto en sus mezclas como en sus tracks, predominan los sintetizadores alegres, house clásico, generando una atmósfera agradable, siempre preservando su bajo minimalista para nunca perder el groove. En su corta carrera como productor ha podido sellar su música en sellos como NoPreset, Urban Garden, Fahren Lab, Mtion.</p>
+          </div>
+          <div class="multimedia-controls">
+            <button class="multimedia-btn prev" aria-label="Previous">‹</button>
+            <button class="multimedia-btn next" aria-label="Next">›</button>
+          </div>
+          <div class="multimedia-indicators">
+            
+              <button class="indicator active" data-index="0" aria-label="Go to slide 1"></button>
+            
+              <button class="indicator " data-index="1" aria-label="Go to slide 2"></button>
+            
+              <button class="indicator " data-index="2" aria-label="Go to slide 3"></button>
+            
+              <button class="indicator " data-index="3" aria-label="Go to slide 4"></button>
+            
           </div>
         </div>
-      
+        <script>
+          (function() {
+            const carousel = document.querySelector('#multimedia .multimedia-carousel');
+            if (!carousel) return;
+            
+            const track = carousel.querySelector('.multimedia-track');
+            const items = carousel.querySelectorAll('.multimedia-item');
+            const prevBtn = carousel.querySelector('.multimedia-btn.prev');
+            const nextBtn = carousel.querySelector('.multimedia-btn.next');
+            const indicators = carousel.querySelectorAll('.indicator');
+            const videos = carousel.querySelectorAll('video');
+            
+            let currentIndex = 0;
+            let isTransitioning = false;
+            const totalItems = items.length;
+            
+            function updateCarousel() {
+              if (isTransitioning) return;
+              isTransitioning = true;
+              
+              // Calculate previous and next indices with proper wrapping
+              let prevIndex = currentIndex - 1;
+              let nextIndex = currentIndex + 1;
+              
+              // Handle infinite looping
+              if (prevIndex < 0) prevIndex = totalItems - 1;
+              if (nextIndex >= totalItems) nextIndex = 0;
+              
+              // Update all items with 3D positioning
+              items.forEach((item, index) => {
+                // Reset all items first
+                item.style.transform = '';
+                item.style.opacity = '';
+                item.style.zIndex = '';
+                item.classList.remove('active', 'prev', 'next');
+                
+                if (index === currentIndex) {
+                  // Current item - centered and prominent
+                  item.style.transform = 'translateX(0) scale(1)';
+                  item.style.opacity = '1';
+                  item.style.zIndex = '3';
+                  item.classList.add('active');
+                } else if (index === prevIndex) {
+                  // Previous item - left side
+                  item.style.transform = 'translateX(-60%) scale(0.8)';
+                  item.style.opacity = '0.6';
+                  item.style.zIndex = '1';
+                  item.classList.add('prev');
+                } else if (index === nextIndex) {
+                  // Next item - right side
+                  item.style.transform = 'translateX(60%) scale(0.8)';
+                  item.style.opacity = '0.6';
+                  item.style.zIndex = '1';
+                  item.classList.add('next');
+                } else {
+                  // Hide items that are not adjacent
+                  item.style.opacity = '0';
+                  item.style.zIndex = '0';
+                }
+              });
+              
+              // Update indicators
+              indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+              });
+              
+              // Pause all videos
+              videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+              });
+              
+              setTimeout(() => {
+                isTransitioning = false;
+              }, 500);
+            }
+            
+            function goToSlide(index) {
+              if (isTransitioning) return;
+              
+              // Handle infinite looping
+              if (index < 0) {
+                currentIndex = totalItems - 1;
+              } else if (index >= totalItems) {
+                currentIndex = 0;
+              } else {
+                currentIndex = index;
+              }
+              
+              updateCarousel();
+            }
+            
+            function nextSlide() {
+              goToSlide(currentIndex + 1);
+            }
+            
+            function prevSlide() {
+              goToSlide(currentIndex - 1);
+            }
+            
+            // Event listeners
+            if (nextBtn) {
+              nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextSlide();
+              });
+            }
+            
+            if (prevBtn) {
+              prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevSlide();
+              });
+            }
+            
+            indicators.forEach((indicator, index) => {
+              indicator.addEventListener('click', () => goToSlide(index));
+            });
+            
+            // Video play buttons
+            carousel.querySelectorAll('.play-video-btn').forEach((btn, index) => {
+              btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const video = videos[index];
+                if (!video) return;
+                
+                // Pause all other videos first
+                videos.forEach((otherVideo, otherIndex) => {
+                  if (otherIndex !== index && !otherVideo.paused) {
+                    otherVideo.pause();
+                    const otherBtn = carousel.querySelectorAll('.play-video-btn')[otherIndex];
+                    if (otherBtn) {
+                      otherBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                  }
+                });
+                
+                if (video.paused) {
+                  // Unmute and play the video
+                  video.muted = false;
+                  video.play().then(() => {
+                    btn.innerHTML = '<i class="fas fa-pause"></i>';
+                  }).catch((error) => {
+                    console.log('Video play failed:', error);
+                    btn.innerHTML = '<i class="fas fa-play"></i>';
+                  });
+                } else {
+                  video.pause();
+                  btn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+              });
+            });
+            
+            // Keyboard navigation
+            carousel.addEventListener('keydown', (e) => {
+              if (e.key === 'ArrowLeft') prevSlide();
+              if (e.key === 'ArrowRight') nextSlide();
+            });
+            
+            // Touch/swipe support
+            let startX = 0;
+            let endX = 0;
+            
+            carousel.addEventListener('touchstart', (e) => {
+              startX = e.touches[0].clientX;
+            });
+            
+            carousel.addEventListener('touchend', (e) => {
+              endX = e.changedTouches[0].clientX;
+              const diff = startX - endX;
+              
+              if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                  nextSlide();
+                } else {
+                  prevSlide();
+                }
+              }
+            });
+            
+            // Initialize
+            updateCarousel();
+          })();
+        </script>
+        
       
     </div>
   </div>
@@ -3664,7 +4507,7 @@
   flex-direction: column;
   min-width: 420px;
   max-width: 420px;
-  aspect-ratio: 1 / 1.1;
+  height: 70vh;
   background: rgba(255,255,255,0.06);
   border-radius: 14px;
   overflow: hidden;
@@ -3674,10 +4517,8 @@
 
 .carousel-image {
   position: relative;
-  flex: 0 0 30%;
-  aspect-ratio: 16 / 9;
+  flex: 1;
   overflow: hidden;
-  min-height: 320px;
 }
 
 .carousel-image img {
@@ -3694,13 +4535,16 @@
   padding: 0.75rem 1rem;
   min-height: 0;
   position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  text-align: left;
 }
 
 .carousel-date {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 600;
   font-size: 15px;
-  color: rgba(230,241,255,0.9);
+  color: rgba(230,241,255,1);
 }
 
 .carousel-venue {
@@ -3728,7 +4572,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   border: 1px solid rgba(255,255,255,0.18);
   color: #e6f1ff;
   text-decoration: none;
@@ -3740,7 +4584,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 400;
   font-size: 15px;
-  opacity: 0.85;
+  opacity: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3811,21 +4655,16 @@
   }
   
   .carousel-image {
+    flex: 1;
     min-height: 200px;
-    flex: 0 0 70%;
   }
   
   .carousel-info {
     padding: 0.5rem 0.75rem;
     gap: 0.3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
     text-align: left;
-    min-height: 0;
-    flex: 1;
-    position: relative;
   }
   
   .carousel-venue {
@@ -4303,6 +5142,306 @@
   color: #ccc;
 }
 
+/* Presskit Section */
+.presskit-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.presskit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  background: linear-gradient(45deg, #00cc6a, #00ff88);
+}
+
+.presskit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn i {
+  font-size: 1.2rem;
+}
+
+/* Multimedia Carousel */
+.multimedia-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+
+.multimedia-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-item {
+  position: absolute;
+  width: 60%;
+  max-width: 400px;
+  height: 90%;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.multimedia-image,
+.multimedia-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.multimedia-image img,
+.multimedia-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.multimedia-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.multimedia-item:hover .multimedia-overlay,
+.multimedia-overlay:focus-within {
+  opacity: 1;
+}
+
+.multimedia-overlay .play-video-btn {
+  pointer-events: auto;
+}
+
+.multimedia-info {
+  text-align: center;
+  color: white;
+}
+
+.multimedia-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.play-video-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.play-video-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.play-video-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.multimedia-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 21;
+}
+
+.multimedia-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.multimedia-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-btn:focus {
+  outline: 2px solid #00ff88;
+  outline-offset: 2px;
+}
+
+.multimedia-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #00ff88;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .multimedia-overlay {
+    opacity: 1;
+  }
+  
+  .play-video-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    border-width: 3px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 80%;
+    height: 90%;
+  }
+  
+  .multimedia-controls {
+    padding: 0 1rem;
+  }
+  
+  .multimedia-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 90%;
+    height: 90%;
+  }
+  
+  .multimedia-title {
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-width: 3px;
+  }
+}
+
 .social-links {
   display: flex;
   justify-content: center;
@@ -4521,6 +5660,1461 @@
     padding: 0 2.5rem;
   }
   
+  .carousel-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 70vh;
+  }
+  
+  .releases-carousel {
+    padding: 0 2.5rem;
+  }
+  
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+}
+</style>
+  
+
+  
+    <section id="bio" class="content-section text-section" 
+         style="background-image: url('/assets/images/dark-blue-bg.jpg')">
+  
+  
+    <div class="section-overlay"></div>
+  
+  
+      <div class="container">
+      
+        <div class="section-header">
+          <h2 class="section-title">Biografía</h2>
+          
+          
+        </div>
+      
+    
+    <div class="section-content">
+      
+      
+        <div class="bio-content">
+          
+            <div class="bio-image">
+              <img src="/assets/images/daniR_photo2.jpg" alt="Bio photo" loading="lazy">
+            </div>
+          
+          <div class="bio-text">
+            <p>Dani R, nacido en Córdoba, Argentina, es un destacado DJ y productor de música techno/house. En 2020, fue nominado a mejor DJ house del año en los premios MEC. Ha compartido escenario con renombrados artistas como Di Chiara Brothers, Mateo Dufour, Nacho Bolognani, Dale Howard, Toman, Dimmish, Hector Couto y Yaya, por solo nombrar algunos. Su música ha sido lanzada en sellos como NoPreset, UrbanGarden, Studio 405 y Mtion. Actualmente, es residente en La Full, una fiesta que organiza eventos en Argentina y Perú.</p>
+          </div>
+        </div>
+        
+      
+    </div>
+  </div>
+</section>
+
+<style>
+.content-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  scroll-snap-align: start;
+}
+
+.interviews-content {
+  color: white;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Ensure section header is visible in interviews */
+.interviews-section .section-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.interviews-section .section-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(45deg, #fff, #00ff88);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.interviews-tabs {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+}
+
+.tab-button {
+  background: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.tab-button:hover {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+
+.tab-button.active {
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  font-weight: 700;
+  border: none;
+  outline: none;
+}
+
+.tab-button:focus {
+  outline: none;
+  border: none;
+}
+
+.tab-button:active {
+  border: none;
+  outline: none;
+}
+
+.tab-content {
+  position: relative;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.video-content {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.text-image-content {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.content-text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.content-image {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.content-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.text-content {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .interviews-content {
+    padding: 0 0.75rem;
+  }
+  
+  .interviews-section .section-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .tab-buttons {
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .tab-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  .interviews-tabs {
+    height: 400px;
+  }
+  
+  .tab-content {
+    height: 320px;
+  }
+  
+  .text-image-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .content-image {
+    order: -1;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  
+  .content-text,
+  .text-content {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .video-content {
+    height: 100%;
+  }
+  
+  .video-wrapper {
+    border-radius: 8px;
+  }
+}
+
+/* Events Carousel */
+.events-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 0 4rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  transform: translateX(0);
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+
+.carousel-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 420px;
+  max-width: 420px;
+  height: 70vh;
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+  color: #e6f1ff;
+  position: relative;
+}
+
+.carousel-image {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.carousel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.carousel-info {
+  display: grid;
+  grid-template-rows: auto auto auto; /* date, venue row, location */
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  min-height: 0;
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  text-align: left;
+}
+
+.carousel-date {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: rgba(230,241,255,1);
+}
+
+.carousel-venue {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+  .carousel-venue-row {
+    position: relative;
+    display: block;
+  }
+
+.carousel-ticket-icon {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #e6f1ff;
+  text-decoration: none;
+  font-size: 24px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.carousel-location {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  opacity: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carousel-ticket-fab {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #e6f1ff;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.carousel-ticket-fab:hover {
+  transform: translateY(-2px);
+  background: rgba(0,0,0,0.65);
+}
+
+.carousel-controls {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 0 1rem;
+}
+
+.carousel-btn {
+  pointer-events: auto;
+  background: rgba(0,0,0,0.6);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #e6f1ff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(0,0,0,0.75);
+  border-color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 768px) {
+  .carousel-card {
+    min-width: 80vw;
+    max-width: 80vw;
+    aspect-ratio: 1 / 1.3;
+    max-height: 70vh;
+  }
+  
+  .carousel-image {
+    flex: 1;
+    min-height: 200px;
+  }
+  
+  .carousel-info {
+    padding: 0.5rem 0.75rem;
+    gap: 0.3rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    text-align: left;
+  }
+  
+  .carousel-venue {
+    font-size: 18px;
+  }
+  
+  .carousel-date,
+  .carousel-location {
+    font-size: 13px;
+  }
+  
+  .carousel-venue-row {
+    display: block;
+  }
+  
+  .carousel-ticket-icon {
+    position: absolute !important;
+    top: 50% !important;
+    right: 0.75rem !important;
+    transform: translateY(-50%) !important;
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 20px !important;
+  }
+  
+  .carousel-btn {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+    background: rgba(0,0,0,0.7);
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  
+  .events-carousel {
+    padding: 0 3rem;
+  }
+  
+  .releases-carousel {
+    padding: 0 3rem;
+  }
+  
+  .carousel-controls {
+    padding: 0 1.5rem;
+  }
+}
+
+.section-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  color: white;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(45deg, #fff, #00ff88);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  opacity: 0.8;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Releases Carousel */
+.releases-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 0 4rem;
+}
+
+.releases-carousel .carousel-track {
+  display: flex;
+  gap: 1rem;
+  transform: translateX(0);
+  transition: transform 0.4s ease;
+  will-change: transform;
+  /* Center the track within the container */
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.release-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 200px;
+  max-width: 200px;
+  flex-shrink: 0;
+}
+
+.release-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.release-image {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.release-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.release-card:hover .release-image img {
+  transform: scale(1.1);
+}
+
+.release-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Desktop hover behavior */
+@media (hover: hover) {
+  .release-card:hover .release-overlay {
+    opacity: 1;
+  }
+}
+
+/* Mobile click behavior */
+@media (hover: none) {
+  .release-card.active .release-overlay {
+    opacity: 1;
+  }
+  
+  /* Disable links until card is active */
+  .release-card:not(.active) .release-icon-link {
+    pointer-events: none;
+    opacity: 0;
+    cursor: default;
+  }
+  
+  .release-card.active .release-icon-link {
+    pointer-events: auto;
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+  /* Visual feedback for active card */
+  .release-card.active {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.2);
+  }
+}
+
+.release-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.release-icon-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  color: #e6f1ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.release-icon-link:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+.release-info {
+  padding: 0.75rem;
+  color: white;
+}
+
+.release-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.release-label {
+  opacity: 0.8;
+  margin: 0;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Events List */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  color: #e6f1ff;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.event-row:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.08);
+}
+
+.event-left {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.event-date {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: rgba(230,241,255,0.9);
+}
+
+.event-venue {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+}
+
+.event-location {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.event-right {
+  display: flex;
+  align-items: center;
+}
+
+.event-ticket-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: rgba(230,241,255,0.12);
+  color: #e6f1ff;
+  text-decoration: none;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.event-ticket-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(230,241,255,0.18);
+}
+
+/* Media Grid */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.media-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-5px);
+}
+
+.media-image {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.media-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.media-card:hover .media-overlay {
+  opacity: 1;
+}
+
+.play-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.media-duration {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.media-link {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.media-link:hover {
+  transform: scale(1.1);
+}
+
+.media-info {
+  padding: 1.5rem;
+  color: white;
+}
+
+.media-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.media-date {
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Bio Content */
+.bio-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: center;
+  color: white;
+  min-height: 0;
+  overflow: visible;
+}
+
+.bio-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bio-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+}
+
+.bio-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Contact Content */
+.contact-content {
+  text-align: center;
+  color: white;
+}
+
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color 0.3s ease;
+}
+
+.contact-email:hover {
+  color: #ccc;
+}
+
+/* Presskit Section */
+.presskit-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.presskit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  background: linear-gradient(45deg, #00cc6a, #00ff88);
+}
+
+.presskit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn i {
+  font-size: 1.2rem;
+}
+
+/* Multimedia Carousel */
+.multimedia-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+
+.multimedia-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-item {
+  position: absolute;
+  width: 60%;
+  max-width: 400px;
+  height: 90%;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.multimedia-image,
+.multimedia-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.multimedia-image img,
+.multimedia-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.multimedia-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.multimedia-item:hover .multimedia-overlay,
+.multimedia-overlay:focus-within {
+  opacity: 1;
+}
+
+.multimedia-overlay .play-video-btn {
+  pointer-events: auto;
+}
+
+.multimedia-info {
+  text-align: center;
+  color: white;
+}
+
+.multimedia-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.play-video-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.play-video-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.play-video-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.multimedia-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 21;
+}
+
+.multimedia-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.multimedia-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-btn:focus {
+  outline: 2px solid #00ff88;
+  outline-offset: 2px;
+}
+
+.multimedia-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #00ff88;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .multimedia-overlay {
+    opacity: 1;
+  }
+  
+  .play-video-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    border-width: 3px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 80%;
+    height: 90%;
+  }
+  
+  .multimedia-controls {
+    padding: 0 1rem;
+  }
+  
+  .multimedia-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 90%;
+    height: 90%;
+  }
+  
+  .multimedia-title {
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-width: 3px;
+  }
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .content-section {
+    padding: 3rem 0;
+    /* Better mobile handling - use full viewport but adjust content positioning */
+    min-height: 100vh;
+  }
+  
+  .section-header {
+    margin-bottom: 2rem;
+  }
+  
+  .section-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  
+  .section-subtitle {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+  }
+  
+  .releases-carousel .release-card {
+    min-width: 160px;
+    max-width: 160px;
+  }
+  
+  .releases-grid,
+  .events-grid,
+  .media-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .bio-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .bio-image {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  .bio-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .bio-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 0 0.5rem;
+  }
+  
+  .social-links {
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .social-link span {
+    display: none;
+  }
+  
+  .social-link {
+    padding: 1rem;
+    min-width: 50px;
+    justify-content: center;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  .content-section {
+    padding: 2rem 0;
+    min-height: 100vh;
+  }
+  
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+  
+  .release-info,
+  .event-info,
+  .media-info {
+    padding: 1rem;
+  }
+  
+  .bio-content {
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bio-image {
+    max-width: 250px;
+  }
+  
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .content-section {
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+  
+  .bio-content {
+    gap: 1rem;
+    padding: 0 0.25rem;
+  }
+  
+  .bio-image {
+    max-width: 200px;
+  }
+  
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .bio-image {
+    max-width: 250px;
+  }
+  
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .contact-email {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .carousel-card {
+    aspect-ratio: 1 / 1.4;
+    max-height: 60vh;
+  }
+  
+  .carousel-image {
+    min-height: 150px;
+    flex: 0 0 70%;
+  }
+  
+  .carousel-info {
+    padding: 0.4rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    min-height: 0;
+    flex: 1;
+    position: relative;
+  }
+  
+  .carousel-venue {
+    font-size: 16px;
+  }
+  
+  .carousel-date,
+  .carousel-location {
+    font-size: 12px;
+  }
+  
+  .events-carousel {
+    padding: 0 2.5rem;
+  }
+  
+  .carousel-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 70vh;
+  }
+  
   .releases-carousel {
     padding: 0 2.5rem;
   }
@@ -4540,12 +7134,14 @@
   
   
   
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Prensa</h2>
+      <div class="container">
       
+        <div class="section-header">
+          <h2 class="section-title">Prensa</h2>
+          
+          
+        </div>
       
-    </div>
     
     <div class="section-content">
       
@@ -4861,7 +7457,7 @@
   flex-direction: column;
   min-width: 420px;
   max-width: 420px;
-  aspect-ratio: 1 / 1.1;
+  height: 70vh;
   background: rgba(255,255,255,0.06);
   border-radius: 14px;
   overflow: hidden;
@@ -4871,10 +7467,8 @@
 
 .carousel-image {
   position: relative;
-  flex: 0 0 30%;
-  aspect-ratio: 16 / 9;
+  flex: 1;
   overflow: hidden;
-  min-height: 320px;
 }
 
 .carousel-image img {
@@ -4891,13 +7485,16 @@
   padding: 0.75rem 1rem;
   min-height: 0;
   position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  text-align: left;
 }
 
 .carousel-date {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 600;
   font-size: 15px;
-  color: rgba(230,241,255,0.9);
+  color: rgba(230,241,255,1);
 }
 
 .carousel-venue {
@@ -4925,7 +7522,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   border: 1px solid rgba(255,255,255,0.18);
   color: #e6f1ff;
   text-decoration: none;
@@ -4937,7 +7534,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 400;
   font-size: 15px;
-  opacity: 0.85;
+  opacity: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5008,21 +7605,16 @@
   }
   
   .carousel-image {
+    flex: 1;
     min-height: 200px;
-    flex: 0 0 70%;
   }
   
   .carousel-info {
     padding: 0.5rem 0.75rem;
     gap: 0.3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
     text-align: left;
-    min-height: 0;
-    flex: 1;
-    position: relative;
   }
   
   .carousel-venue {
@@ -5500,6 +8092,306 @@
   color: #ccc;
 }
 
+/* Presskit Section */
+.presskit-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.presskit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  background: linear-gradient(45deg, #00cc6a, #00ff88);
+}
+
+.presskit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn i {
+  font-size: 1.2rem;
+}
+
+/* Multimedia Carousel */
+.multimedia-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+
+.multimedia-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-item {
+  position: absolute;
+  width: 60%;
+  max-width: 400px;
+  height: 90%;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.multimedia-image,
+.multimedia-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.multimedia-image img,
+.multimedia-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.multimedia-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.multimedia-item:hover .multimedia-overlay,
+.multimedia-overlay:focus-within {
+  opacity: 1;
+}
+
+.multimedia-overlay .play-video-btn {
+  pointer-events: auto;
+}
+
+.multimedia-info {
+  text-align: center;
+  color: white;
+}
+
+.multimedia-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.play-video-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.play-video-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.play-video-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.multimedia-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 21;
+}
+
+.multimedia-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.multimedia-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-btn:focus {
+  outline: 2px solid #00ff88;
+  outline-offset: 2px;
+}
+
+.multimedia-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #00ff88;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .multimedia-overlay {
+    opacity: 1;
+  }
+  
+  .play-video-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    border-width: 3px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 80%;
+    height: 90%;
+  }
+  
+  .multimedia-controls {
+    padding: 0 1rem;
+  }
+  
+  .multimedia-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 90%;
+    height: 90%;
+  }
+  
+  .multimedia-title {
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-width: 3px;
+  }
+}
+
 .social-links {
   display: flex;
   justify-content: center;
@@ -5718,6 +8610,12 @@
     padding: 0 2.5rem;
   }
   
+  .carousel-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 70vh;
+  }
+  
   .releases-carousel {
     padding: 0 2.5rem;
   }
@@ -5737,14 +8635,16 @@
   
   
   
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Contacto</h2>
+      <div class="container">
       
+        <div class="section-header">
+          <h2 class="section-title">Contacto</h2>
+          
+          
+            <p class="section-subtitle">Reservas y colaboraciones</p>
+          
+        </div>
       
-        <p class="section-subtitle">Reservas y colaboraciones</p>
-      
-    </div>
     
     <div class="section-content">
       
@@ -5758,6 +8658,15 @@
               </a>
             
           </div>
+          
+          
+            <div class="presskit-section">
+              <button class="presskit-btn" data-url="https://www.infobae.com/espana/" data-password="iuxwlood535810">
+                <i class="fas fa-download"></i>
+                Kit de Prensa
+              </button>
+            </div>
+          
           
           
             <div class="social-links">
@@ -5785,7 +8694,53 @@
             </div>
           
         </div>
-      
+        
+        <script>
+          // Presskit password protection with obfuscation
+          (function() {
+            const presskitBtn = document.querySelector('.presskit-btn');
+            if (!presskitBtn) return;
+            
+            // Simple obfuscation function
+            function obfuscate(str) {
+              return str.split('').map(char => 
+                String.fromCharCode(char.charCodeAt(0) + 3)
+              ).join('');
+            }
+            
+            function deobfuscate(str) {
+              return str.split('').map(char => 
+                String.fromCharCode(char.charCodeAt(0) - 3)
+              ).join('');
+            }
+            
+            // Get the obfuscated password from data attribute
+            const obfuscatedPassword = presskitBtn.dataset.password;
+            const url = presskitBtn.dataset.url;
+            
+            presskitBtn.addEventListener('click', function() {
+              // Prompt for password
+              const userPassword = prompt('Enter password to access press kit:');
+              
+              if (userPassword === null) {
+                // User cancelled
+                return;
+              }
+              
+              // Deobfuscate the stored password and compare
+              const correctPassword = deobfuscate(obfuscatedPassword);
+              
+              if (userPassword === correctPassword) {
+                // Correct password - open the link
+                window.open(url, '_blank');
+              } else {
+                // Wrong password
+                alert('Incorrect password. Please try again.');
+              }
+            });
+          })();
+        </script>
+        
       
     </div>
   </div>
@@ -6032,7 +8987,7 @@
   flex-direction: column;
   min-width: 420px;
   max-width: 420px;
-  aspect-ratio: 1 / 1.1;
+  height: 70vh;
   background: rgba(255,255,255,0.06);
   border-radius: 14px;
   overflow: hidden;
@@ -6042,10 +8997,8 @@
 
 .carousel-image {
   position: relative;
-  flex: 0 0 30%;
-  aspect-ratio: 16 / 9;
+  flex: 1;
   overflow: hidden;
-  min-height: 320px;
 }
 
 .carousel-image img {
@@ -6062,13 +9015,16 @@
   padding: 0.75rem 1rem;
   min-height: 0;
   position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  text-align: left;
 }
 
 .carousel-date {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 600;
   font-size: 15px;
-  color: rgba(230,241,255,0.9);
+  color: rgba(230,241,255,1);
 }
 
 .carousel-venue {
@@ -6096,7 +9052,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   border: 1px solid rgba(255,255,255,0.18);
   color: #e6f1ff;
   text-decoration: none;
@@ -6108,7 +9064,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 400;
   font-size: 15px;
-  opacity: 0.85;
+  opacity: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -6179,21 +9135,16 @@
   }
   
   .carousel-image {
+    flex: 1;
     min-height: 200px;
-    flex: 0 0 70%;
   }
   
   .carousel-info {
     padding: 0.5rem 0.75rem;
     gap: 0.3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
     text-align: left;
-    min-height: 0;
-    flex: 1;
-    position: relative;
   }
   
   .carousel-venue {
@@ -6671,6 +9622,306 @@
   color: #ccc;
 }
 
+/* Presskit Section */
+.presskit-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.presskit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  background: linear-gradient(45deg, #00cc6a, #00ff88);
+}
+
+.presskit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+}
+
+.presskit-btn i {
+  font-size: 1.2rem;
+}
+
+/* Multimedia Carousel */
+.multimedia-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+
+.multimedia-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multimedia-item {
+  position: absolute;
+  width: 60%;
+  max-width: 400px;
+  height: 90%;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.multimedia-image,
+.multimedia-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.multimedia-image img,
+.multimedia-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.multimedia-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.multimedia-item:hover .multimedia-overlay,
+.multimedia-overlay:focus-within {
+  opacity: 1;
+}
+
+.multimedia-overlay .play-video-btn {
+  pointer-events: auto;
+}
+
+.multimedia-info {
+  text-align: center;
+  color: white;
+}
+
+.multimedia-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.play-video-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.play-video-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.play-video-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.multimedia-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 21;
+}
+
+.multimedia-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.multimedia-btn:active {
+  transform: scale(0.95);
+}
+
+.multimedia-btn:focus {
+  outline: 2px solid #00ff88;
+  outline-offset: 2px;
+}
+
+.multimedia-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #00ff88;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .multimedia-overlay {
+    opacity: 1;
+  }
+  
+  .play-video-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    border-width: 3px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 80%;
+    height: 90%;
+  }
+  
+  .multimedia-controls {
+    padding: 0 1rem;
+  }
+  
+  .multimedia-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multimedia-container {
+    height: 80vh;
+  }
+  
+  .multimedia-item {
+    width: 90%;
+    height: 90%;
+  }
+  
+  .multimedia-title {
+    font-size: 1.2rem;
+  }
+  
+  .play-video-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-width: 3px;
+  }
+}
+
 .social-links {
   display: flex;
   justify-content: center;
@@ -6889,6 +10140,12 @@
     padding: 0 2.5rem;
   }
   
+  .carousel-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 70vh;
+  }
+  
   .releases-carousel {
     padding: 0 2.5rem;
   }
@@ -6918,6 +10175,8 @@
           <a href="#releases" class="footer-link">Música</a>
         
           <a href="#gigs" class="footer-link">Shows</a>
+        
+          <a href="#multimedia" class="footer-link">Multimedia</a>
         
           <a href="#bio" class="footer-link">Biografía</a>
         
@@ -7171,7 +10430,7 @@
     }
   },
   "hero": {
-    "video": "/assets/DaniR_BG.mov",
+    "video": "/assets/video/DaniR_BG.mov",
     "profileImage": "/assets/images/daniR_avatar.png",
     "name": "DaniR",
     "subtitle": {
@@ -7215,6 +10474,15 @@
         "de": "Shows"
       },
       "href": "#gigs"
+    },
+    {
+      "text": {
+        "en": "Multimedia",
+        "es": "Multimedia",
+        "fr": "Multimédia",
+        "de": "Multimedia"
+      },
+      "href": "#multimedia"
     },
     {
       "text": {
@@ -7434,72 +10702,98 @@
       "type": "events",
       "items": [
         {
-          "date": "2025-09-15",
+          "date": "2025-08-28",
           "venue": {
-            "en": "Club Paradise",
-            "es": "Club Paradise",
-            "fr": "Club Paradise",
-            "de": "Club Paradise"
+            "en": "Club Bela",
+            "es": "Club Bela",
+            "fr": "Club Bela",
+            "de": "Club Bela"
           },
           "location": {
-            "en": "Miami, FL, USA",
-            "es": "Miami, FL, Estados Unidos",
-            "fr": "Miami, FL, États-Unis",
-            "de": "Miami, FL, USA"
+            "en": "Cordoba, Argentina",
+            "es": "Cordoba, Argentina",
+            "fr": "Cordoba, Argentine",
+            "de": "Cordoba, Argentinien"
           },
-          "image": "/assets/images/event_stock1.jpg",
+          "image": "/assets/images/gig1.jpg",
           "ticketUrl": "#"
         },
         {
-          "date": "2025-10-01",
+          "date": "2025-06-13",
           "venue": {
-            "en": "Warehouse Party",
-            "es": "Warehouse Party",
-            "fr": "Warehouse Party",
-            "de": "Warehouse Party"
+            "en": "Resistencia Club",
+            "es": "Resistencia Club",
+            "fr": "Resistencia Club",
+            "de": "Resistencia Club"
           },
           "location": {
-            "en": "Berlin, Germany",
-            "es": "Berlín, Alemania",
-            "fr": "Berlin, Allemagne",
-            "de": "Berlin, Deutschland"
+            "en": "Cordoba, Argentina",
+            "es": "Cordoba, Argentina",
+            "fr": "Cordoba, Argentine",
+            "de": "Cordoba, Argentinien"
           },
-          "image": "/assets/images/event_stock2.jpg",
+          "image": "/assets/images/gig2.jpg",
           "ticketUrl": "#"
         },
         {
-          "date": "2025-10-08",
+          "date": "2025-05-16",
           "venue": {
-            "en": "Zebra Club",
-            "es": "Zebra Club",
-            "fr": "Zebra Club",
-            "de": "Zebra Club"
+            "en": "Resistencia Club",
+            "es": "Resistencia Club",
+            "fr": "Resistencia Club",
+            "de": "Resistencia Club"
           },
           "location": {
-            "en": "Villa Carlos Paz, Argentina",
-            "es": "Villa Carlos Paz, Argentina",
-            "fr": "Villa Carlos Paz, Argentine",
-            "de": "Villa Carlos Paz, Argentinien"
+            "en": "Cordoba, Argentina",
+            "es": "Cordoba, Argentina",
+            "fr": "Cordoba, Argentine",
+            "de": "Cordoba, Argentinien"
           },
-          "image": "/assets/images/event_stock3.jpg",
+          "image": "/assets/images/gig3.jpg",
           "ticketUrl": "#"
+        }
+      ]
+    },
+    "multimedia": {
+      "id": "multimedia",
+      "title": {
+        "en": "Multimedia",
+        "es": "Multimedia",
+        "fr": "Multimédia",
+        "de": "Multimedia"
+      },
+      "subtitle": {
+        "en": "Photos, videos and behind the scenes",
+        "es": "Fotos, videos y detrás de escena",
+        "fr": "Photos, vidéos et coulisses",
+        "de": "Fotos, Videos und hinter den Kulissen"
+      },
+      "type": "multimedia",
+      "enabled": true,
+      "items": [
+        {
+          "type": "image",
+          "title": "Studio Session",
+          "src": "/assets/images/multi1.jpg",
+          "alt": "DaniR in studio session"
         },
         {
-          "date": "2025-10-15",
-          "venue": {
-            "en": "Zandanga",
-            "es": "Zandanga",
-            "fr": "Zandanga",
-            "de": "Zandanga"
-          },
-          "location": {
-            "en": "Lagos, Nigeria",
-            "es": "Lagos, Nigeria",
-            "fr": "Lagos, Nigeria",
-            "de": "Lagos, Nigeria"
-          },
-          "image": "/assets/images/event_stock4.jpg",
-          "ticketUrl": "#"
+          "type": "image",
+          "title": "Studio Session",
+          "src": "/assets/images/multi2.jpg",
+          "alt": "DaniR in studio session"
+        },
+        {
+          "type": "image",
+          "title": "Studio Session",
+          "src": "/assets/images/multi3.jpg",
+          "alt": "DaniR in studio session"
+        },
+        {
+          "type": "video",
+          "title": "Studio Session",
+          "src": "/assets/video/multi4.mp4",
+          "alt": "DaniR in studio session"
         }
       ]
     },
@@ -7520,10 +10814,10 @@
       "background": "/assets/images/dark-blue-bg.jpg",
       "type": "text",
       "content": {
-        "en": "Dani R born in Cordoba, Argentina. He is a producer Minimal / Minimal Deep - Tech in full growth. he began to be interested in music in his adolescence using the piano as a connector. In August 2019 he began his career as a DJ and in July 2020 as a producer. So much in his mixes as in his tracks, the cheerful synths predominate, classic house, generating a pleasant atmosphere, always preserving his minimalist bass to never lose the groove. In his short career as a producer he has been able to seal his music on labels such as NoPreset, Urban Garden, Fahren Lab, Mtion.",
-        "es": "Dani R nacido en Córdoba, Argentina. Es un productor Minimal / Minimal Deep - Tech en pleno crecimiento. Comenzó a interesarse por la música en su adolescencia usando el piano como conector. En agosto de 2019 comenzó su carrera como DJ y en julio de 2020 como productor. Tanto en sus mezclas como en sus tracks, predominan los sintetizadores alegres, house clásico, generando una atmósfera agradable, siempre preservando su bajo minimalista para nunca perder el groove. En su corta carrera como productor ha podido sellar su música en sellos como NoPreset, Urban Garden, Fahren Lab, Mtion.",
-        "fr": "Dani R né à Cordoba, Argentine. Il est un producteur Minimal / Minimal Deep - Tech en pleine croissance. Il a commencé à s'intéresser à la musique dans son adolescence en utilisant le piano comme connecteur. En août 2019, il a commencé sa carrière de DJ et en juillet 2020 comme producteur. Tant dans ses mix que dans ses tracks, les synthétiseurs joyeux prédominent, house classique, générant une atmosphère agréable, préservant toujours sa basse minimaliste pour ne jamais perdre le groove. Dans sa courte carrière de producteur, il a pu sceller sa musique sur des labels comme NoPreset, Urban Garden, Fahren Lab, Mtion.",
-        "de": "Dani R geboren in Cordoba, Argentinien. Er ist ein Minimal / Minimal Deep - Tech Produzent im vollen Wachstum. Er begann sich in seiner Jugend für Musik zu interessieren und nutzte das Klavier als Verbindung. Im August 2019 begann er seine Karriere als DJ und im Juli 2020 als Produzent. Sowohl in seinen Mixes als auch in seinen Tracks dominieren die fröhlichen Synths, klassischer House, die eine angenehme Atmosphäre erzeugen und dabei immer seinen minimalistischen Bass bewahren, um niemals den Groove zu verlieren. In seiner kurzen Karriere als Produzent konnte er seine Musik auf Labels wie NoPreset, Urban Garden, Fahren Lab, Mtion veröffentlichen."
+        "en": "Dani R, born in Córdoba, Argentina, is an outstanding DJ and techno/house music producer. In 2020, he was nominated for best house DJ of the year at the MEC Awards. He has shared the stage with renowned artists such as Di Chiara Brothers, Mateo Dufour, Nacho Bolognani, Dale Howard, Toman, Dimmish, Hector Couto and Yaya, to name just a few. His music has been released on labels such as NoPreset, UrbanGarden, Studio 405 and Mtion. Currently, he is a resident at La Full, a party that organizes events in Argentina and Peru.",
+        "es": "Dani R, nacido en Córdoba, Argentina, es un destacado DJ y productor de música techno/house. En 2020, fue nominado a mejor DJ house del año en los premios MEC. Ha compartido escenario con renombrados artistas como Di Chiara Brothers, Mateo Dufour, Nacho Bolognani, Dale Howard, Toman, Dimmish, Hector Couto y Yaya, por solo nombrar algunos. Su música ha sido lanzada en sellos como NoPreset, UrbanGarden, Studio 405 y Mtion. Actualmente, es residente en La Full, una fiesta que organiza eventos en Argentina y Perú.",
+        "fr": "Dani R, né à Córdoba, Argentine, est un DJ et producteur de musique techno/house de premier plan. En 2020, il a été nominé pour le meilleur DJ house de l'année aux MEC Awards. Il a partagé la scène avec des artistes renommés comme Di Chiara Brothers, Mateo Dufour, Nacho Bolognani, Dale Howard, Toman, Dimmish, Hector Couto et Yaya, pour n'en nommer que quelques-uns. Sa musique a été publiée sur des labels comme NoPreset, UrbanGarden, Studio 405 et Mtion. Actuellement, il est résident à La Full, une fête qui organise des événements en Argentine et au Pérou.",
+        "de": "Dani R, geboren in Córdoba, Argentinien, ist ein herausragender DJ und Techno/House-Musikproduzent. Im Jahr 2020 wurde er für den besten House-DJ des Jahres bei den MEC Awards nominiert. Er hat die Bühne mit renommierten Künstlern wie Di Chiara Brothers, Mateo Dufour, Nacho Bolognani, Dale Howard, Toman, Dimmish, Hector Couto und Yaya geteilt, um nur einige zu nennen. Seine Musik wurde auf Labels wie NoPreset, UrbanGarden, Studio 405 und Mtion veröffentlicht. Derzeit ist er Resident bei La Full, einer Party, die Veranstaltungen in Argentinien und Peru organisiert."
       },
       "image": "/assets/images/daniR_photo2.jpg"
     },
@@ -7568,6 +10862,17 @@
       },
       "type": "contact",
       "email": "infopenbookings@gmail.com",
+      "presskit": {
+        "enabled": true,
+        "url": "https://www.infobae.com/espana/",
+        "password": "iuxwlood535810",
+        "title": {
+          "en": "Press Kit",
+          "es": "Kit de Prensa",
+          "fr": "Kit Presse",
+          "de": "Pressemappe"
+        }
+      },
       "social": [
         {
           "platform": "Instagram",
@@ -7894,11 +11199,11 @@
       
       // Debounce wheel events
       const now = Date.now();
-      if (now - lastWheelTime < 50) return; // Minimum 50ms between wheel events
+      if (now - lastWheelTime < 150) return; // Minimum 150ms between wheel events (increased from 50ms)
       lastWheelTime = now;
       
       // Check for significant scroll
-      if (Math.abs(e.deltaY) < 5) return; // Ignore very small scroll movements
+      if (Math.abs(e.deltaY) < 15) return; // Ignore small scroll movements (increased from 5)
       
       if (e.deltaY > 0) {
         // Scroll down
